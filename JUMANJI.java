@@ -1,5 +1,5 @@
 
-public class JUMANJI
+public class JUMANJI extends SPIEL
 {
     
     public JUMANJI()
