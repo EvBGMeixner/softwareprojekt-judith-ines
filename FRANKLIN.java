@@ -1,6 +1,6 @@
 
 
-public class FRANKLIN extends SPIELER
+public class FRANKLIN extends FIGUR
 {
    
     public FRANKLIN()
