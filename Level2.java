@@ -34,6 +34,8 @@ public class Level2 extends LEVEL
             Ruby.bewegenR();
             Franklin.bewegenR();
         }
+        if(ruby.beruehrt(gift){rubyverliereLeben();};
+        if(ruby.beruehrt(nilpferd){rubyverliereLeben();}
     }
     @Override
     public void tasteReagieren(int taste){
