@@ -481,4 +481,4 @@ extends Figur
     {
         super.setzeAnimationPausiert( pausiert );
     }
-}
+    }

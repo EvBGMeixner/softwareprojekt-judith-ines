@@ -39,4 +39,6 @@ public class FRANKLIN extends FIGUR
             }
         }
     }
+    public void geheAufStart(){
+        setzeMittelpunkt(0,0);}
 }
