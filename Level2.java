@@ -47,10 +47,19 @@ public class Level2 extends LEVEL
         }
         if(pausiert == false){
             if(taste == 37){
-                schlaeger.bewegeNachLinks();
+                Franklin.bewegeNachLinks();
             }else if(taste == 39){
-                schlaeger.bewegeNachRechts();
-            }
+                Franklin.bewegeNachRechts();
+            }else if (taste == 26){
+                Franklin.springen();
+            }else {Franklin.anhalten();}
+            if(taste == 37){
+                Ruby.bewegeNachLinks();
+            }else if(taste == 39){
+                Ruby.bewegeNachRechts();
+            }else if (taste == 26){
+                Ruby.springen();
+            }else {Franklin.anhalten();}
         }
     }
 }
