@@ -1,6 +1,6 @@
 
 public class Level2 extends LEVEL
-{  BLOCK[] blöcke;
+{   BLOCK[] blöcke;
     FRANKLIN franklin;
     RUBY ruby;
     Nilpferd[] nilpferde;
@@ -10,6 +10,7 @@ public class Level2 extends LEVEL
     Diamand[] diamanten;
     Liane[] lianen;
     TEXT anzeigeleben;
+    boolean pausiert;
     
     public Level2()
     {blöcke= new BLOCK[30];
@@ -23,4 +24,33 @@ public class Level2 extends LEVEL
         lianen= new Liane[3];
         anzeigeleben=new TEXT (-12,8,1,"I I I");
         
-    }}
+    }
+    @Override
+    public void bildAktualisierungReagieren(double sekunden) {
+        if (pausiert==false){
+            Ruby.bewegenR();
+            Franklin.bewegenR();
+        }
+    }
+    @Override
+    public void tasteReagieren(int taste){
+        if(taste == 38){
+            Ruby.geschwindigkeit=0;
+            Franklin.geschwindigkeit=0;
+            pausiert = true;
+            anzeigeLeben.setzeInhalt("Leben:"+leben+ "                                        PAUSE");            
+        }if (taste == 40){
+            ball.bewegen();
+            ball.geschwindigkeit=0.2;
+            pausiert = false;
+            anzeigeLeben.setzeInhalt("Leben:"+leben);
+        }
+        if(pausiert == false){
+            if(taste == 37){
+                schlaeger.bewegeNachLinks();
+            }else if(taste == 39){
+                schlaeger.bewegeNachRechts();
+            }
+        }
+    }
+}
