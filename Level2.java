@@ -1,6 +1,7 @@
 
 public class Level2 extends LEVEL
-{   BLOCK[] blöcke;
+{   int leben;
+    BLOCK[] blöcke;
     FRANKLIN franklin;
     RUBY ruby;
     Nilpferd[] nilpferde;
@@ -10,10 +11,12 @@ public class Level2 extends LEVEL
     Diamand[] diamanten;
     Liane[] lianen;
     TEXT anzeigeleben;
+    TEXT anzeigeverloren;
     boolean pausiert;
     
     public Level2()
-    {blöcke= new BLOCK[30];
+    {leben=3;
+        blöcke= new BLOCK[30];
         franklin= new FRANKLIN();
         ruby= new RUBY();
         nilpferde= new Nilpferd[4];
@@ -22,7 +25,7 @@ public class Level2 extends LEVEL
         autolevel1= new Auto();
         diamanten= new Diamand[7];
         lianen= new Liane[3];
-        anzeigeleben=new TEXT (-12,8,1,"I I I");
+        anzeigeleben=new TEXT (-12,8,1,"Leben: I I I");
         
     }
     @Override
@@ -61,5 +64,23 @@ public class Level2 extends LEVEL
                 Ruby.springen();
             }else {Franklin.anhalten();}
         }
+    }
+    public void rubyverliereLeben(){
+        if(leben>0){leben=leben-1;};
+        if(leben==2)anzeigeleben.setzeInhalt("Leben: I I");
+        if(leben==1)anzeigeleben.setzeInhalt("Leben: I");
+        if (leben>0){
+            ruby.geheAufStart();};
+        if(leben==0){anzeigeverloren.setzeInhalt("verloren :(");
+            anzeigeleben.setzeInhalt(" ");};
+    }
+    public void franklinverliereLeben(){
+        if(leben>0){leben=leben-1;};
+        if(leben==2)anzeigeleben.setzeInhalt("Leben: I I");
+        if(leben==1)anzeigeleben.setzeInhalt("Leben: I");
+        if (leben>0){
+            ruby.geheAufStart();};
+        if(leben==0){anzeigeverloren.setzeInhalt("verloren :(");
+            anzeigeleben.setzeInhalt(" ");};
     }
 }
