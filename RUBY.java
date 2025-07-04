@@ -3,6 +3,7 @@ public class RUBY extends FIGUR
 {
     double deltaX;
     double deltaY;
+    
     public RUBY()
     {
         super("");

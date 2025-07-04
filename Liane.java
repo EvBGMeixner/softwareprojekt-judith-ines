@@ -1,13 +1,12 @@
 
 public class Liane extends FIGUR
 {
-    /**
-     * Konstruktor für Objekte der Klasse Liane
-     */
+    boolean lianeziehen;
     public Liane()
     {
-        // Instanzvariable initialisieren
-        x = 0;
+        super("");
     }
-
+    void lianeziehen(){
+        
+    }
 }
