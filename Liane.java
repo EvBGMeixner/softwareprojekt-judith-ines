@@ -10,4 +10,8 @@ public class Liane extends FIGUR
     void lianeziehen(){
         
     }
+<<<<<<< HEAD
+=======
+    
+>>>>>>> d89f665adc75fd77974471828b79e0d6d4e45788
 }
