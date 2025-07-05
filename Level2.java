@@ -1,4 +1,3 @@
-
 public class Level2 extends SPIEL
 {   int leben;
     BLOCK[] blöcke;
@@ -19,20 +18,39 @@ public class Level2 extends SPIEL
     {   
         super(800,600, false);
         leben=3;
-        blöcke= new BLOCK[30];
-        for (int i=0; i<5;i++){
+        blöcke= new BLOCK[10];
+        for (int i=0; i<blöcke.length; i++){
+            blöcke[i] = new BLOCK(-i, -10); // Beispiel: BLOCK(int x, int y)
         }
+        
         franklin= new FRANKLIN("Titelloses 4.png");
-        ruby= new RUBY("Titelloses 6.png");
+       // ruby= new RUBY("Titelloses 6.png");
+        
+        /*
         nilpferde= new Nilpferd[4];
+        for (int i=0; i<nilpferde.length; i++){
+            nilpferde[i] = new Nilpferd("nilpferd.png", "bilder/");
+        }
         gift= new Gift[10];
+        for (int i=0; i<gift.length; i++){
+            gift[i] = new Gift("gift.png", "bilder/");
+        }
         baumstamm= new Baumstamm[3];
-        autolevel1= new Auto("auto","");
+        for (int i=0; i<baumstamm.length; i++){
+            baumstamm[i] = new Baumstamm("baumstamm.png", "bilder/");
+        }
+        autolevel1= new Auto("auto.png", "bilder/");
         diamanten= new Diamand[7];
+        for (int i=0; i<diamanten.length; i++){
+            diamanten[i] = new Diamand("diamant.png", "bilder/");
+        }
         lianen= new Liane[3];
+        for (int i=0; i<lianen.length; i++){
+            lianen[i] = new Liane("liane.png", "bilder/");
+        }
         anzeigeleben=new TEXT (-12,8,1,"Leben: I I I");
         anzeigediamanten= new TEXT(12,8,1,"0");
-        gesammeltediamanten=0;
+        gesammeltediamanten=0;*/
         //FRANKLIN.aktivMachen();
         //RUBY.aktivMachen();
         //for(int i; i<30; i++){blöcke[i].passivMachen();};
@@ -44,12 +62,12 @@ public class Level2 extends SPIEL
         if (pausiert==false){
          //   RUBY.bewegenR();
           //  FRANKLIN.bewegenR();
-        }
+        }/*
         for(int i=0;i<10;i++){if(ruby.beruehrt(gift[i])){rubyverliereLeben();};};
         for(int i=0;i<3;i++){if(ruby.beruehrt(nilpferde[i])){rubyverliereLeben();}};
         for(int i=0;i<3;i++){if(franklin.beruehrt(nilpferde[i])){franklinverliereLeben();};}
         for(int i=0;i<3;i++){if(ruby.beruehrt(baumstamm[i])||franklin.beruehrt(baumstamm[i])){
-        baumstamm[i].umfallen();}}
+        baumstamm[i].umfallen();}}*/
     }
     //@Override
     //public void tasteReagieren(int taste){
@@ -108,4 +126,3 @@ public class Level2 extends SPIEL
     //if(ruby.beruehrt(autolevel1)&& franklin.beruehrt(autolevel1)){
     //return("Gewonnen!");}}
 }
-    

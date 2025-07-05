@@ -5,7 +5,7 @@ public class RUBY extends FIGUR
     double deltaY;
     double geschwindigkeit;
     public RUBY(String bildName){
-        super("");
+        super(bildName);
         deltaX = 0;
         deltaY = 0;
         geschwindigkeit=0;
