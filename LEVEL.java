@@ -19,7 +19,7 @@ import ea.edu.Figur;
 public class LEVEL
 implements TastenReagierbar, Ticker, MausKlickReagierbar, MausRadReagierbar, BildAktualisierungReagierbar {
 
-    private static SPIEL s;
+    public static SPIEL s;
 
     private Figur hintergrundbild;
 

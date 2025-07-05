@@ -3,12 +3,14 @@ public class FRANKLIN extends FIGUR
 {
     double deltaX;
     double deltaY;
+    double geschwindigkeit;
 
     public FRANKLIN(String bildName)
     {
         super("");
         deltaX = 0;
         deltaY = 0;
+        geschwindigkeit=0;
 
     }
 

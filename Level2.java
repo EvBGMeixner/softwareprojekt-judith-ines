@@ -1,5 +1,5 @@
 
-public class Level2 extends LEVEL
+public class Level2 extends SPIEL
 {   int leben;
     BLOCK[] blöcke;
     FRANKLIN franklin;
@@ -16,7 +16,9 @@ public class Level2 extends LEVEL
     boolean pausiert;
     int gesammeltediamanten;
     public Level2()
-    {leben=3;
+    {   
+        super(800,600, false);
+        leben=3;
         blöcke= new BLOCK[30];
         for (int i=0; i<5;i++){
         }
@@ -31,53 +33,54 @@ public class Level2 extends LEVEL
         anzeigeleben=new TEXT (-12,8,1,"Leben: I I I");
         anzeigediamanten= new TEXT(12,8,1,"0");
         gesammeltediamanten=0;
-        FRANKLIN.aktivMachen();
-        RUBY.aktivMachen();
-        BlOCK.passivMachen();
-        Baumstamm.passivMachen();
+        //FRANKLIN.aktivMachen();
+        //RUBY.aktivMachen();
+        //for(int i; i<30; i++){blöcke[i].passivMachen();};
+       // Baumstamm.passivMachen();
+  
     }
     @Override
     public void bildAktualisierungReagieren(double sekunden) {
         if (pausiert==false){
-            RUBY.bewegenR();
-            FRANKLIN.bewegenR();
+         //   RUBY.bewegenR();
+          //  FRANKLIN.bewegenR();
         }
-        if(ruby.beruehrt(gift)){rubyverliereLeben();};
-        if(ruby.beruehrt(nilpferd)){rubyverliereLeben();}
-        if(franklin.beruehrt(nilpferd)){franklinverliereLeben();};
-        if(ruby.beruehrt(baumstamm)||franklin.beruehrt(baumstamm)){
-        baumstamm.umfallen();}
+        for(int i=0;i<10;i++){if(ruby.beruehrt(gift[i])){rubyverliereLeben();};};
+        for(int i=0;i<3;i++){if(ruby.beruehrt(nilpferde[i])){rubyverliereLeben();}};
+        for(int i=0;i<3;i++){if(franklin.beruehrt(nilpferde[i])){franklinverliereLeben();};}
+        for(int i=0;i<3;i++){if(ruby.beruehrt(baumstamm[i])||franklin.beruehrt(baumstamm[i])){
+        baumstamm[i].umfallen();}}
     }
-    @Override
-    public void tasteReagieren(int taste){
-        if(taste == 38){
-            RUBY.geschwindigkeit=0;
-            FRANKLIN.geschwindigkeit=0;
-            pausiert = true;
-            anzeigeLeben.setzeInhalt("Leben:"+leben+ "                                        PAUSE");            
-        }if (taste == 40){
-            ball.bewegen();
-            ball.geschwindigkeit=0.2;
-            pausiert = false;
-            anzeigeLeben.setzeInhalt("Leben:"+leben);
-        }
-        if(pausiert == false){
-            if(taste == 37){
-                FRANKLIN.bewegeNachLinks();
-            }else if(taste == 39){
-                FRANKLIN.bewegeNachRechts();
-            }else if (taste == 26){
-                FRANKLIN.springen();
-            }else {FRANKLIN.anhalten();}
-            if(taste == 37){
-                RUBY.bewegeNachLinks();
-            }else if(taste == 39){
-                RUBY.bewegeNachRechts();
-            }else if (taste == 26){
-                RUBY.springen();
-            }else {FRANKLIN.anhalten();}
-        }
-    }
+    //@Override
+    //public void tasteReagieren(int taste){
+       // if(taste == 38){
+            //RUBY.geschwindigkeit=0;
+            //FRANKLIN.geschwindigkeit=0;
+          //  pausiert = true;
+          //  anzeigeleben.setzeInhalt("Leben:"+leben+ "                                        PAUSE");            
+       // }if (taste == 40){
+            //ball.bewegen();
+            //ball.geschwindigkeit=0.2;
+         //   pausiert = false;
+          //  anzeigeleben.setzeInhalt("Leben:"+leben);
+       // }
+        //if(pausiert == false){
+            //if(taste == 37){
+            //    FRANKLIN.bewegeNachLinks();
+           // }else if(taste == 39){
+             //   FRANKLIN.bewegeNachRechts();
+           // }else if (taste == 26){
+            //    FRANKLIN.springen();
+           // }else {FRANKLIN.anhalten();}
+           // if(taste == 37){
+            //    RUBY.bewegeNachLinks();
+           // }else if(taste == 39){
+            //    RUBY.bewegeNachRechts();
+            //}else if (taste == 26){
+            //    RUBY.springen();
+            //}else {FRANKLIN.anhalten();}
+        //}
+    //}
     public void rubyverliereLeben(){
         if(leben>0){leben=leben-1;};
         if(leben==2)anzeigeleben.setzeInhalt("Leben: I I");
@@ -101,8 +104,8 @@ public class Level2 extends LEVEL
         gesammeltediamanten=gesammeltediamanten+1;
         anzeigediamanten.setzeInhalt(gesammeltediamanten);}
     }}
-    public String gewinnen(){
-    if(ruby.beruehrt(autolevel1)&& franklin.beruehrt(autolevel1)){
-    return("Gewonnen!");}}
+   // public String gewinnen(){
+    //if(ruby.beruehrt(autolevel1)&& franklin.beruehrt(autolevel1)){
+    //return("Gewonnen!");}}
 }
     
