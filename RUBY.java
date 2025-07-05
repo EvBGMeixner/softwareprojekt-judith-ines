@@ -4,9 +4,9 @@ public class RUBY extends FIGUR
     double deltaX;
     double deltaY;
     
-    public RUBY()
+    public RUBY(Titelloses 6)
     {
-        super("");
+        
         deltaX = 0;
         deltaY = 0;
 
