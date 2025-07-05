@@ -2,8 +2,8 @@
 public class Nilpferd extends FIGUR
 {
 
-    public Nilpferd()
-    {
+    public Nilpferd(String zustandName , String gifPfad)
+    {super("");
        
     }
 

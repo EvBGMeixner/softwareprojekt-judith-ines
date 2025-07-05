@@ -12,21 +12,25 @@ public class Level2 extends LEVEL
     Liane[] lianen;
     TEXT anzeigeleben;
     TEXT anzeigeverloren;
+    TEXT anzeigediamanten;
     boolean pausiert;
-    
+    int gesammeltediamanten;
     public Level2()
     {leben=3;
         blöcke= new BLOCK[30];
-        franklin= new FRANKLIN();
-        ruby= new RUBY();
+        for (int i=0; i<5;i++){
+        }
+        franklin= new FRANKLIN("franklingehenachrechts","");
+        ruby= new RUBY("rubygehenachrechts","");
         nilpferde= new Nilpferd[4];
         gift= new Gift[10];
         baumstamm= new Baumstamm[3];
-        autolevel1= new Auto();
+        autolevel1= new Auto("auto","");
         diamanten= new Diamand[7];
         lianen= new Liane[3];
         anzeigeleben=new TEXT (-12,8,1,"Leben: I I I");
-        
+        anzeigediamanten= new TEXT(12,8,1,"0");
+        gesammeltediamanten=0;
     }
     @Override
     public void bildAktualisierungReagieren(double sekunden) {
@@ -34,14 +38,17 @@ public class Level2 extends LEVEL
             Ruby.bewegenR();
             Franklin.bewegenR();
         }
-        if(ruby.beruehrt(gift){rubyverliereLeben();};
-        if(ruby.beruehrt(nilpferd){rubyverliereLeben();}
+        if(ruby.beruehrt(gift)){rubyverliereLeben();};
+        if(ruby.beruehrt(nilpferd)){rubyverliereLeben();}
+        if(franklin.beruehrt(nilpferd)){franklinverliereLeben();};
+        if(ruby.beruehrt(baumstamm)||franklin.beruehrt(baumstamm)){
+        baumstamm.umfallen();}
     }
     @Override
     public void tasteReagieren(int taste){
         if(taste == 38){
-            Ruby.geschwindigkeit=0;
-            Franklin.geschwindigkeit=0;
+            RUBY.geschwindigkeit=0;
+            FRANKLIN.geschwindigkeit=0;
             pausiert = true;
             anzeigeLeben.setzeInhalt("Leben:"+leben+ "                                        PAUSE");            
         }if (taste == 40){
@@ -52,19 +59,19 @@ public class Level2 extends LEVEL
         }
         if(pausiert == false){
             if(taste == 37){
-                Franklin.bewegeNachLinks();
+                FRANKLIN.bewegeNachLinks();
             }else if(taste == 39){
-                Franklin.bewegeNachRechts();
+                FRANKLIN.bewegeNachRechts();
             }else if (taste == 26){
-                Franklin.springen();
-            }else {Franklin.anhalten();}
+                FRANKLIN.springen();
+            }else {FRANKLIN.anhalten();}
             if(taste == 37){
-                Ruby.bewegeNachLinks();
+                RUBY.bewegeNachLinks();
             }else if(taste == 39){
-                Ruby.bewegeNachRechts();
+                RUBY.bewegeNachRechts();
             }else if (taste == 26){
-                Ruby.springen();
-            }else {Franklin.anhalten();}
+                RUBY.springen();
+            }else {FRANKLIN.anhalten();}
         }
     }
     public void rubyverliereLeben(){
@@ -85,4 +92,13 @@ public class Level2 extends LEVEL
         if(leben==0){anzeigeverloren.setzeInhalt("verloren :(");
             anzeigeleben.setzeInhalt(" ");};
     }
+    public void diamantensammeln(){
+    for(int i=0; i<7;i++){if(ruby.beruehrt(diamanten[i])|| franklin.beruehrt(diamanten[i])){
+        gesammeltediamanten=gesammeltediamanten+1;
+        anzeigediamanten.setzeInhalt(gesammeltediamanten);}
+    }}
+    public String gewinnen(){
+    if(ruby.beruehrt(autolevel1)&& franklin.beruehrt(autolevel1)){
+    return("Gewonnen!");}}
 }
+    
