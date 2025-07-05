@@ -1,6 +1,24 @@
 public class Level2 extends SPIEL
 {   int leben;
-    BLOCK[] blöcke;
+    BLOCK[] blöckereihe14;
+    BLOCK[] blöckereihe12;
+    BLOCK[] blöckereihe12teil2;
+    BLOCK[] blöckereihe11;
+    BLOCK[] blöckereihe9;
+    BLOCK[] blöckereihe8;
+    BLOCK[] blöckereihe8teil2;
+    BLOCK block91;
+    BLOCK block92;
+    BLOCK block61;
+    BLOCK block62;
+    BLOCK block51;
+    BLOCK block52;
+    BLOCK block53;
+    BLOCK block4;
+    BLOCK[] blöckereihe4;
+    BLOCK[] blöckereihe3;
+    BLOCK[] blöckereihe3teil2;
+    BLOCK[] blöckereihe2;
     FRANKLIN franklin;
     RUBY ruby;
     Nilpferd[] nilpferde;
@@ -18,12 +36,92 @@ public class Level2 extends SPIEL
     {   
         super(800,600, false);
         leben=3;
-        blöcke= new BLOCK[10];
-        for (int i=0; i<blöcke.length; i++){
-            blöcke[i] = new BLOCK(-i, -10); // Beispiel: BLOCK(int x, int y)
+        blöckereihe14= new BLOCK[14];
+        int k=-13;
+        for (int i=0; i<blöckereihe14.length; i++){
+            blöckereihe14[i] = new BLOCK(k, -10); // Beispiel: BLOCK(int x, int y)
+            k=k+2;
+        }
+        blöckereihe12= new BLOCK[6];
+        int l=-13;
+        for (int i=0; i<blöckereihe12.length; i++){
+            blöckereihe14[i] = new BLOCK(l, -8); // Beispiel: BLOCK(int x, int y)
+            l=l+2;
         }
         
-        franklin= new FRANKLIN("Titelloses 4.png");
+        blöckereihe12teil2= new BLOCK[2];
+        int m=3;
+        for (int i=0; i<blöckereihe12teil2.length; i++){
+            blöckereihe12teil2[i] = new BLOCK(m, -8); // Beispiel: BLOCK(int x, int y)
+            m=m+2;
+        }
+        
+        blöckereihe11= new BLOCK[4];
+        int n=7;
+        for (int i=0; i<blöckereihe14.length; i++){
+            blöckereihe14[i] = new BLOCK(n, -7); // Beispiel: BLOCK(int x, int y)
+            n=n+2;
+        }
+        
+        blöckereihe9= new BLOCK[2];
+        int o=-1;
+        for (int i=0; i<blöckereihe9.length; i++){
+            blöckereihe9[i] = new BLOCK(o, -5); // Beispiel: BLOCK(int x, int y)
+            o=o+2;
+        }
+        
+        block91=new BLOCK(-5,-5);
+        block92=new BLOCK(5,-5);
+        
+        blöckereihe8= new BLOCK[3];
+        int p=-13;
+        for (int i=0; i<blöckereihe8.length; i++){
+            blöckereihe8[i] = new BLOCK(p, -4); // Beispiel: BLOCK(int x, int y)
+            p=p+2;
+        }
+        
+        blöckereihe8teil2= new BLOCK[3];
+        int q=9;
+        for (int i=0; i<blöckereihe8teil2.length; i++){
+            blöckereihe8teil2[i] = new BLOCK(q, -4); // Beispiel: BLOCK(int x, int y)
+            q=q+2;
+        }
+        
+        block61=new BLOCK(-3,-2);
+        block62=new BLOCK(8,-2);
+        block51=new BLOCK(-12,0);
+        block52=new BLOCK(-6,0);
+        block53=new BLOCK(0,0);
+        block4=new BLOCK(-2,3);
+        
+        blöckereihe4= new BLOCK[2];
+        int r=10;
+        for (int i=0; i<blöckereihe4.length; i++){
+            blöckereihe4[i] = new BLOCK(r, 2); // Beispiel: BLOCK(int x, int y)
+            r=r+2;
+        }
+        
+        blöckereihe3= new BLOCK[3];
+        int s=-13;
+        for (int i=0; i<blöckereihe3.length; i++){
+            blöckereihe3[i] = new BLOCK(s, 4); // Beispiel: BLOCK(int x, int y)
+            s=s+2;
+        }
+        
+        blöckereihe3teil2= new BLOCK[2];
+        int t=3;
+        for (int i=0; i<blöckereihe3teil2.length; i++){
+            blöckereihe3teil2[i] = new BLOCK(t, 4); // Beispiel: BLOCK(int x, int y)
+            t=t+2;
+        }
+        
+        blöckereihe2= new BLOCK[3];
+        int u=9;
+        for (int i=0; i<blöckereihe2.length; i++){
+            blöckereihe2[i] = new BLOCK(u, 6); // Beispiel: BLOCK(int x, int y)
+            u=u+2;
+        }
+        //franklin= new FRANKLIN("Titelloses 4.png");
        // ruby= new RUBY("Titelloses 6.png");
         
         /*
@@ -47,10 +145,10 @@ public class Level2 extends SPIEL
         lianen= new Liane[3];
         for (int i=0; i<lianen.length; i++){
             lianen[i] = new Liane("liane.png", "bilder/");
-        }
-        anzeigeleben=new TEXT (-12,8,1,"Leben: I I I");
-        anzeigediamanten= new TEXT(12,8,1,"0");
-        gesammeltediamanten=0;*/
+        }*/
+        anzeigeleben=new TEXT (-10,9,0.5,"Leben: I I I");
+        anzeigediamanten= new TEXT(10,9,0.5,"Diamanten: 0");
+        gesammeltediamanten=0;
         //FRANKLIN.aktivMachen();
         //RUBY.aktivMachen();
         //for(int i; i<30; i++){blöcke[i].passivMachen();};
