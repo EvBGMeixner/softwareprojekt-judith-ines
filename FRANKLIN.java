@@ -5,7 +5,7 @@ public class FRANKLIN extends FIGUR
    double deltaX;
     double deltaY;
 
-    public FRANKLIN()
+    public FRANKLIN(String bildName)
     {
         super("");
         deltaX = 0;

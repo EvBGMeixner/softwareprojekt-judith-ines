@@ -20,8 +20,8 @@ public class Level2 extends LEVEL
         blöcke= new BLOCK[30];
         for (int i=0; i<5;i++){
         }
-        franklin= new FRANKLIN("franklingehenachrechts","");
-        ruby= new RUBY("rubygehenachrechts","");
+        franklin= new FRANKLIN("Titelloses 4.png");
+        ruby= new RUBY("Titelloses 6.png");
         nilpferde= new Nilpferd[4];
         gift= new Gift[10];
         baumstamm= new Baumstamm[3];
@@ -31,12 +31,16 @@ public class Level2 extends LEVEL
         anzeigeleben=new TEXT (-12,8,1,"Leben: I I I");
         anzeigediamanten= new TEXT(12,8,1,"0");
         gesammeltediamanten=0;
+        FRANKLIN.aktivMachen();
+        RUBY.aktivMachen();
+        BlOCK.passivMachen();
+        Baumstamm.passivMachen();
     }
     @Override
     public void bildAktualisierungReagieren(double sekunden) {
         if (pausiert==false){
-            Ruby.bewegenR();
-            Franklin.bewegenR();
+            RUBY.bewegenR();
+            FRANKLIN.bewegenR();
         }
         if(ruby.beruehrt(gift)){rubyverliereLeben();};
         if(ruby.beruehrt(nilpferd)){rubyverliereLeben();}

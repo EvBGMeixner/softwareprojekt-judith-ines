@@ -4,7 +4,7 @@ public class RUBY extends FIGUR
     double deltaX;
     double deltaY;
     
-    public RUBY()
+    public RUBY(String bildName)
     {
         super("");
         deltaX = 0;
