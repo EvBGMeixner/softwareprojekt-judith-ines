@@ -4,9 +4,13 @@ public class RUBY extends FIGUR
     double deltaX;
     double deltaY;
     
+<<<<<<< HEAD
     public RUBY(String bildName)
+=======
+    public RUBY(Titelloses 6)
+>>>>>>> 0bd0f8b837b2205493fc7ddd63f8abaae3ab7aba
     {
-        super("");
+        
         deltaX = 0;
         deltaY = 0;
 

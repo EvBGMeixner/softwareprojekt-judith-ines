@@ -1,8 +1,7 @@
 
-
 public class FRANKLIN extends FIGUR
 {
-   double deltaX;
+    double deltaX;
     double deltaY;
 
     public FRANKLIN(String bildName)
@@ -12,6 +11,7 @@ public class FRANKLIN extends FIGUR
         deltaY = 0;
 
     }
+
     public void bewegenF(){
         verschiebenUm(deltaX, 0);
     }
@@ -40,6 +40,7 @@ public class FRANKLIN extends FIGUR
             }
         }
     }
+
     public void geheAufStart(){
         setzeMittelpunkt(0,0);}
 }
