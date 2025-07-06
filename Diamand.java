@@ -1,7 +1,7 @@
 public class Diamand extends FIGUR
 {
-    public Diamand(String zustandName , String gifPfad)
+    public Diamand(String bildName)
     {
-        super("");
+        super(bildName);
     }
 }

@@ -3,9 +3,9 @@ public class Gift extends FIGUR
 {
     
 
-    public Gift(String zustandName , String gifPfad)
+    public Gift(String bildName)
     {
-        super("");
+        super(bildName);
         
     }
 }

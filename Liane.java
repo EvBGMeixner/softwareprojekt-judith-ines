@@ -2,9 +2,9 @@
 public class Liane extends FIGUR
 {
     boolean lianeziehen;
-    public Liane(String zustandName , String gifPfad)
+    public Liane(String bildName)
     {
-        super("");
+        super(bildName);
     }
     public 
     void lianeziehen(){

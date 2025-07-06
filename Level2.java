@@ -36,6 +36,7 @@ public class Level2 extends SPIEL
     {   
         super(800,600, false);
         leben=3;
+        setzeSchwerkraft(3.5);
         blöckereihe14= new BLOCK[14];
         int k=-13;
         for (int i=0; i<blöckereihe14.length; i++){
@@ -121,30 +122,53 @@ public class Level2 extends SPIEL
             blöckereihe2[i] = new BLOCK(u, 6); // Beispiel: BLOCK(int x, int y)
             u=u+2;
         }
-        //franklin= new FRANKLIN("Titelloses 4.png");
-       // ruby= new RUBY("Titelloses 6.png");
+        franklin= new FRANKLIN("Titelloses 42.png");
+        franklin.setzeMittelpunkt( -9 , -9 );
+        ruby= new RUBY("Ruby_s.png");
+        ruby.setzeMittelpunkt( -8 , -9 );
         
-        /*
-        nilpferde= new Nilpferd[4];
+        autolevel1= new Auto("Car_s.png");
+        autolevel1.setzeMittelpunkt(11,7 );
+        
+        nilpferde= new Nilpferd[2];
         for (int i=0; i<nilpferde.length; i++){
-            nilpferde[i] = new Nilpferd("nilpferd.png", "bilder/");
+            nilpferde[i] = new Nilpferd("Nilpferd_.png");
         }
-        gift= new Gift[10];
+        nilpferde[0].setzeMittelpunkt(5,-7);
+        nilpferde[1].setzeMittelpunkt(0,1);
+        
+        gift= new Gift[4];
         for (int i=0; i<gift.length; i++){
-            gift[i] = new Gift("gift.png", "bilder/");
+            gift[i] = new Gift("Gift_.png");
         }
-        baumstamm= new Baumstamm[3];
+        gift[0].setzeMittelpunkt(3,-8.75);
+        gift[1].setzeMittelpunkt(-6,-6.75);
+        gift[2].setzeMittelpunkt(-10,5.25);
+        gift[3].setzeMittelpunkt(5,5.25);
+        baumstamm= new Baumstamm[2];
         for (int i=0; i<baumstamm.length; i++){
-            baumstamm[i] = new Baumstamm("baumstamm.png", "bilder/");
-        }
-        autolevel1= new Auto("auto.png", "bilder/");
-        diamanten= new Diamand[7];
+            baumstamm[i] = new Baumstamm("Baumstamm_.png");}
+        baumstamm[0].setzeMittelpunkt(8,-6);
+        baumstamm[1].setzeMittelpunkt(-9,5);
+        
+        diamanten= new Diamand[5];
         for (int i=0; i<diamanten.length; i++){
-            diamanten[i] = new Diamand("diamant.png", "bilder/");
+            diamanten[i] = new Diamand("Diamond_s.png");
         }
-        lianen= new Liane[3];
+        diamanten[0].setzeMittelpunkt(12,-6);
+        diamanten[1].setzeMittelpunkt(11,3);
+        diamanten[2].setzeMittelpunkt(-12,1);
+        diamanten[3].setzeMittelpunkt(-3,-1);
+        diamanten[4].setzeMittelpunkt(-12.5,5);/*
+        lianen= new Liane[6];
         for (int i=0; i<lianen.length; i++){
-            lianen[i] = new Liane("liane.png", "bilder/");
+            lianen[i] = new Liane("liane.png");
+        lianen[0].setzeMittelpunkt(8,-8);
+        lianen[1].setzeMittelpunkt(-12.5,-5);
+        lianen[2].setzeMittelpunkt(-12.5,3);
+        lianen[3].setzeMittelpunkt(11,-5);
+        lianen[4].setzeMittelpunkt(12,5);
+        lianen[5].setzeMittelpunkt(-6,3);
         }*/
         anzeigeleben=new TEXT (-10,9,0.5,"Leben: I I I");
         anzeigediamanten= new TEXT(10,9,0.5,"Diamanten: 0");

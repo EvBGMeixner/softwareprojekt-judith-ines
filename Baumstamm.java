@@ -3,9 +3,9 @@ public class Baumstamm extends FIGUR
 {
     boolean umgefallen;
     
-    public Baumstamm( String zustandName , String gifPfad )
+    public Baumstamm( String bildName )
     {
-        super( zustandName , gifPfad );
+        super( bildName);
     }
     public void umfallen(){
     }
