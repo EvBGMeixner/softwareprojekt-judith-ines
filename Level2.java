@@ -215,8 +215,8 @@ public class Level2 extends SPIEL
             franklin.bewegeNachLinksF();
         }if(taste == 39){
             franklin.bewegeNachRechtsF();
-        }if (taste == 26){
-            franklin.springen(3);
+        }if (taste == 38){
+            franklin.springe(3);
         }
         //if(taste == 65){
         //  ruby.bewegeNachLinksR();
