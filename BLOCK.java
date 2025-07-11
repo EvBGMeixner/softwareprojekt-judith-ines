@@ -5,5 +5,6 @@ public class BLOCK extends RECHTECK
     { super(2,0.5);
       setzeMittelpunkt(x,y);
       setzeFarbe("Braun");
+      machePassiv();
     }
 }

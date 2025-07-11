@@ -10,4 +10,5 @@ public class Liane extends FIGUR
     void lianeziehen(){
         
     }
+
 }

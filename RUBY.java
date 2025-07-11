@@ -2,11 +2,16 @@
 public class RUBY extends FIGUR{
     double deltaX;
     double deltaY;
+
+    
+
     public RUBY(String bildName){
         super(bildName);
-    
+
         deltaX = 0;
         deltaY = 0;
+
+        macheAktiv();
 
     }
     public void bewegenR(){
@@ -14,11 +19,11 @@ public class RUBY extends FIGUR{
     }
 
     public void bewegeNachLinksR(){
-        deltaX = -0.2;
+        deltaX = -0.1;
     }
 
     public void bewegeNachRechtsR(){
-        deltaX = 0.2;
+        deltaX = 0.1;
     }
 
     public void anhalten(){
@@ -35,8 +40,10 @@ public class RUBY extends FIGUR{
             catch(Exception e) {
                 //  Block of code to handle errors
             }
+            verschiebenUm(deltaX, deltaY);
         }
     }
+
     public void geheAufStart(){
         setzeMittelpunkt(0,0);}
 }
