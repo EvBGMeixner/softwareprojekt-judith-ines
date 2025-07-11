@@ -3,7 +3,7 @@ public class RUBY extends FIGUR
 {
     double deltaX;
     double deltaY;
-    
+
     public RUBY()
     {
         super("");
@@ -11,6 +11,7 @@ public class RUBY extends FIGUR
         deltaY = 0;
 
     }
+
     public void bewegenR(){
         verschiebenUm(deltaX, 0);
     }
@@ -39,6 +40,7 @@ public class RUBY extends FIGUR
             }
         }
     }
+
     public void geheAufStart(){
         setzeMittelpunkt(0,0);}
 }
