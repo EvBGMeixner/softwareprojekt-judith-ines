@@ -36,6 +36,7 @@ public class Level2 extends SPIEL
     {   
         super(800,600, false);
         leben=3;
+        pausiert=false;
         setzeSchwerkraft(3.5);
         blöckereihe14= new BLOCK[14];
         int k=-13;
@@ -182,20 +183,29 @@ public class Level2 extends SPIEL
     @Override
     public void bildAktualisierungReagieren(double sekunden) {
         if (pausiert==false){
-         //   RUBY.bewegenR();
-          //  FRANKLIN.bewegenR();
-        }/*
+         ruby.bewegenR();
+         franklin.bewegenF();
+        }
+        if(istTasteGedrueckt(68)){
+        ruby.verschiebenUm(0.1,0);}
+        if(istTasteGedrueckt(65)){
+        ruby.verschiebenUm(-0.1,0);}
+        if(istTasteGedrueckt(87)){
+        ruby.springe(1);}
+    /*
+        if(ruby.beruehrt(diamand[])||franklin.beruhrt(diamand[]){
+                diamand[i].animiereFarbe(0.5, "schwarz");
+                diamand[i].entfernen();
+
         for(int i=0;i<10;i++){if(ruby.beruehrt(gift[i])){rubyverliereLeben();};};
         for(int i=0;i<3;i++){if(ruby.beruehrt(nilpferde[i])){rubyverliereLeben();}};
         for(int i=0;i<3;i++){if(franklin.beruehrt(nilpferde[i])){franklinverliereLeben();};}
         for(int i=0;i<3;i++){if(ruby.beruehrt(baumstamm[i])||franklin.beruehrt(baumstamm[i])){
         baumstamm[i].umfallen();}}*/
     }
-    //@Override
-    //public void tasteReagieren(int taste){
+    @Override
+    public void tasteReagieren(int taste){
        // if(taste == 38){
-            //RUBY.geschwindigkeit=0;
-            //FRANKLIN.geschwindigkeit=0;
           //  pausiert = true;
           //  anzeigeleben.setzeInhalt("Leben:"+leben+ "                                        PAUSE");            
        // }if (taste == 40){
@@ -204,23 +214,37 @@ public class Level2 extends SPIEL
          //   pausiert = false;
           //  anzeigeleben.setzeInhalt("Leben:"+leben);
        // }
-        //if(pausiert == false){
-            //if(taste == 37){
-            //    FRANKLIN.bewegeNachLinks();
-           // }else if(taste == 39){
-             //   FRANKLIN.bewegeNachRechts();
-           // }else if (taste == 26){
-            //    FRANKLIN.springen();
-           // }else {FRANKLIN.anhalten();}
-           // if(taste == 37){
-            //    RUBY.bewegeNachLinks();
-           // }else if(taste == 39){
-            //    RUBY.bewegeNachRechts();
-            //}else if (taste == 26){
-            //    RUBY.springen();
-            //}else {FRANKLIN.anhalten();}
-        //}
-    //}
+        if(pausiert == false){
+            if(taste == 37){
+                franklin.bewegeNachLinksF();
+            }
+            if(taste == 39){
+                franklin.bewegeNachRechtsF();
+            }
+            if (taste == 38){
+                franklin.springe(3);
+            }
+            //if(taste == 65){
+                //ruby.bewegeNachLinksR();
+            //}
+            //if(taste == 68){
+                //ruby.bewegeNachRechtsR();
+            //}
+            //if (taste == 87){
+                //ruby.springe(4);
+            //}
+            //{ruby.anhalten();}
+        }
+    }
+    @Override
+    public void tasteLosgelassenReagieren(int taste){
+        if(taste == 37||taste == 39){
+            franklin.deltaX = 0;
+        }
+        if(taste == 65||taste == 68){
+            ruby.deltaX = 0;
+        }        
+    }
     public void rubyverliereLeben(){
         if(leben>0){leben=leben-1;};
         if(leben==2)anzeigeleben.setzeInhalt("Leben: I I");
