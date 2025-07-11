@@ -1,15 +1,12 @@
 
-public class RUBY extends FIGUR
-{
+public class RUBY extends FIGUR{
     double deltaX;
     double deltaY;
-    double geschwindigkeit;
     public RUBY(String bildName){
         super(bildName);
     
         deltaX = 0;
         deltaY = 0;
-        geschwindigkeit=0;
 
     }
     public void bewegenR(){

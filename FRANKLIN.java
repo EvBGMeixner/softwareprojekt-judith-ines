@@ -1,16 +1,13 @@
 
-public class FRANKLIN extends FIGUR
-{
+public class FRANKLIN extends FIGUR{
     double deltaX;
     double deltaY;
-    double geschwindigkeit;
 
     public FRANKLIN(String bildName)
     {
         super(bildName);
         deltaX = 0;
         deltaY = 0;
-        geschwindigkeit=0;
 
     }
 

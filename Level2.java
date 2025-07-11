@@ -39,6 +39,7 @@ public class Level2 extends SPIEL
         setzeSchwerkraft(3.5);
         blöckereihe14= new BLOCK[14];
         int k=-13;
+        
         for (int i=0; i<blöckereihe14.length; i++){
             blöckereihe14[i] = new BLOCK(k, -10); // Beispiel: BLOCK(int x, int y)
             k=k+2;
@@ -181,46 +182,34 @@ public class Level2 extends SPIEL
     }
     @Override
     public void bildAktualisierungReagieren(double sekunden) {
-        if (pausiert==false){
-         //   RUBY.bewegenR();
-          //  FRANKLIN.bewegenR();
-        }/*
+        ruby.bewegenR();
+        franklin.bewegenF();
+        
         for(int i=0;i<10;i++){if(ruby.beruehrt(gift[i])){rubyverliereLeben();};};
         for(int i=0;i<3;i++){if(ruby.beruehrt(nilpferde[i])){rubyverliereLeben();}};
         for(int i=0;i<3;i++){if(franklin.beruehrt(nilpferde[i])){franklinverliereLeben();};}
         for(int i=0;i<3;i++){if(ruby.beruehrt(baumstamm[i])||franklin.beruehrt(baumstamm[i])){
-        baumstamm[i].umfallen();}}*/
+        baumstamm[i].umfallen();}}
+        
     }
-    //@Override
-    //public void tasteReagieren(int taste){
-       // if(taste == 38){
-            //RUBY.geschwindigkeit=0;
-            //FRANKLIN.geschwindigkeit=0;
-          //  pausiert = true;
-          //  anzeigeleben.setzeInhalt("Leben:"+leben+ "                                        PAUSE");            
-       // }if (taste == 40){
-            //ball.bewegen();
-            //ball.geschwindigkeit=0.2;
-         //   pausiert = false;
-          //  anzeigeleben.setzeInhalt("Leben:"+leben);
-       // }
-        //if(pausiert == false){
-            //if(taste == 37){
-            //    FRANKLIN.bewegeNachLinks();
-           // }else if(taste == 39){
-             //   FRANKLIN.bewegeNachRechts();
-           // }else if (taste == 26){
-            //    FRANKLIN.springen();
-           // }else {FRANKLIN.anhalten();}
-           // if(taste == 37){
-            //    RUBY.bewegeNachLinks();
-           // }else if(taste == 39){
-            //    RUBY.bewegeNachRechts();
-            //}else if (taste == 26){
-            //    RUBY.springen();
-            //}else {FRANKLIN.anhalten();}
-        //}
-    //}
+    @Override
+    public void tasteReagieren(int taste){
+            if(taste == 37){
+                franklin.bewegeNachLinksF();
+            }else if(taste == 39){
+                franklin.bewegeNachRechtsF();
+            }else if (taste == 26){
+                franklin.springen();
+            }else {franklin.anhalten();}
+            if(taste == 65){
+                ruby.bewegeNachLinksR();
+            }else if(taste == 68){
+                ruby.bewegeNachRechtsR();
+            }else if (taste == 87){
+                ruby.springen();
+            }else {ruby.anhalten();}
+        }
+    
     public void rubyverliereLeben(){
         if(leben>0){leben=leben-1;};
         if(leben==2)anzeigeleben.setzeInhalt("Leben: I I");
