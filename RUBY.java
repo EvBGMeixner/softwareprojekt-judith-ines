@@ -7,8 +7,13 @@ public class RUBY extends FIGUR
     public RUBY()
     {
         super("");
+    double geschwindigkeit;
+    public RUBY(String bildName){
+        super(bildName);
+    
         deltaX = 0;
         deltaY = 0;
+        geschwindigkeit=0;
 
     }
 
