@@ -7,6 +7,7 @@ public class RUBY extends FIGUR
     public RUBY()
     {
         super("");
+        
     double geschwindigkeit;
     public RUBY(String bildName){
         super(bildName);
