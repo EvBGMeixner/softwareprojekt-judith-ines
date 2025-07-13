@@ -25,7 +25,11 @@ public class Level2 extends SPIEL
     Gift[] gift;
     Baumstamm[] baumstamm;
     Auto autolevel1;
-    Diamand[] diamanten;
+    Diamand diamanten0;
+    Diamand diamanten1;
+    Diamand diamanten2;
+    Diamand diamanten3;
+    Diamand diamanten4;
     Liane[] lianen;
     TEXT anzeigeleben;
     TEXT anzeigeverloren;
@@ -159,15 +163,19 @@ public class Level2 extends SPIEL
         baumstamm[0].setzeMittelpunkt(8,-6);
         baumstamm[1].setzeMittelpunkt(-9,5);
 
-        diamanten= new Diamand[5];
-        for (int i=0; i<diamanten.length; i++){
-            diamanten[i] = new Diamand("Diamond_s.png");
-        }
-        diamanten[0].setzeMittelpunkt(12,-6);
-        diamanten[1].setzeMittelpunkt(11,3);
-        diamanten[2].setzeMittelpunkt(-12,1);
-        diamanten[3].setzeMittelpunkt(-3,-1);
-        diamanten[4].setzeMittelpunkt(-12.5,5);/*
+        
+        
+        diamanten0 = new Diamand("Diamond_s.png");
+        diamanten1 = new Diamand("Diamond_s.png");
+        diamanten2 = new Diamand("Diamond_s.png");
+        diamanten3 = new Diamand("Diamond_s.png");
+        diamanten4 = new Diamand("Diamond_s.png");
+        
+        diamanten0.setzeMittelpunkt(12,-6);
+        diamanten1.setzeMittelpunkt(11,3);
+        diamanten2.setzeMittelpunkt(-12,1);
+        diamanten3.setzeMittelpunkt(-3,-1);
+        diamanten4.setzeMittelpunkt(-12.5,5);/*
         //lianen= new Liane[6];
         //for (int i=0; i<lianen.length; i++){
         //lianen[i] = new Liane("liane.png");
@@ -201,7 +209,7 @@ public class Level2 extends SPIEL
             ruby.verschiebenUm(-0.1,0);}
         if(istTasteGedrueckt(87)){
             ruby.springe(1);}
-            
+
         timer++;
         if(zeit>0){
             if (timer>=65){
@@ -210,32 +218,32 @@ public class Level2 extends SPIEL
                 anzeigetimer.setzeInhalt(zeit);
             }
         }
-        
+
         if (zeit==0){
             anzeigetimer.setzeInhalt(zeit);
             anzeigetimer.setzeFarbe("rot");
         }
         
-        {
-            for(int i=1; i<6;i++)
-            {if(ruby.beruehrt(diamanten[i])|| franklin.beruehrt(diamanten[i])){
-                    gesammeltediamanten=gesammeltediamanten+1;
-                    anzeigediamanten.setzeInhalt(gesammeltediamanten);
-                    diamanten[i].animiereTransparenz(0.5, 100);
-                    }
-            }
-        }
-        //if(ruby.beruehrt(diamand[])||franklin.beruhrt(diamand[]){
-        //diamand[i].animiereFarbe(0.5, "schwarz");
-        //diamand[i].entfernen();
-        //}
+        //for(int i=0; i<5;i++){
+                //if(ruby.beruehrt(diamanten0)){
+                //gesammeltediamanten=gesammeltediamanten+1;
+                //diamanten0.setzeSichtbar(false);
 
-        //for(int i=0;i<10;i++){if(ruby.beruehrt(gift[i])){rubyverliereLeben();};};
-        //for(int i=0;i<3;i++){if(ruby.beruehrt(nilpferde[i])){rubyverliereLeben();}};
-        //for(int i=0;i<3;i++){if(franklin.beruehrt(nilpferde[i])){franklinverliereLeben();};}
-        //for(int i=0;i<3;i++){if(ruby.beruehrt(baumstamm[i])||franklin.beruehrt(baumstamm[i])){
-        //baumstamm[i].umfallen();}}
+            //}
+            //}
+            
+            //if(ruby.beruehrt(diamand[])||franklin.beruhrt(diamand[]){
+            //diamand[i].animiereFarbe(0.5, "schwarz");
+            //diamand[i].entfernen();
+            //}
 
+            //for(int i=0;i<10;i++){if(ruby.beruehrt(gift[i])){rubyverliereLeben();};};
+            //for(int i=0;i<3;i++){if(ruby.beruehrt(nilpferde[i])){rubyverliereLeben();}};
+            //for(int i=0;i<3;i++){if(franklin.beruehrt(nilpferde[i])){franklinverliereLeben();};}
+            //for(int i=0;i<3;i++){if(ruby.beruehrt(baumstamm[i])||franklin.beruehrt(baumstamm[i])){
+            //baumstamm[i].umfallen();}}
+
+        
     }
 
     @Override
@@ -281,7 +289,6 @@ public class Level2 extends SPIEL
             anzeigeleben.setzeInhalt(" ");};
     }
 
-    
     // public String gewinnen(){
     //if(ruby.beruehrt(autolevel1)&& franklin.beruehrt(autolevel1)){
     //return("Gewonnen!");}}
