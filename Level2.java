@@ -330,8 +330,7 @@ public class Level2 extends SPIEL
             if(gesammeltediamanten==5){
                 punkte++;
             }
-            if(punkte==1){
-                }
+            if(punkte==1){}
             if(punkte==2){}
             if(punkte==3){}
         }
