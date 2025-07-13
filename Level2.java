@@ -32,6 +32,10 @@ public class Level2 extends SPIEL
     TEXT anzeigediamanten;
     boolean pausiert;
     int gesammeltediamanten;
+    int timer;
+    TEXT anzeigetimer;
+    int zeit;
+    boolean zustanddiamant;
     public Level2()
     {   
         super(800,600, false);
@@ -40,6 +44,7 @@ public class Level2 extends SPIEL
         setzeSchwerkraft(3.5);
         blöckereihe14= new BLOCK[14];
         int k=-13;
+        zeit=120;
 
         for (int i=0; i<blöckereihe14.length; i++){
             blöckereihe14[i] = new BLOCK(k, -10); // Beispiel: BLOCK(int x, int y)
@@ -128,6 +133,7 @@ public class Level2 extends SPIEL
         franklin.setzeMittelpunkt( -9 , -9 );
         ruby= new RUBY("Ruby_s.png");
         ruby.setzeMittelpunkt( -8 , -9 );
+        anzeigetimer = new TEXT(0, 9, 1, zeit);
 
         autolevel1= new Auto("Car_s.png");
         autolevel1.setzeMittelpunkt(11,7 );
@@ -195,10 +201,34 @@ public class Level2 extends SPIEL
             ruby.verschiebenUm(-0.1,0);}
         if(istTasteGedrueckt(87)){
             ruby.springe(1);}
-
+            
+        timer++;
+        if(zeit>0){
+            if (timer>=65){
+                zeit--;
+                timer = 0;
+                anzeigetimer.setzeInhalt(zeit);
+            }
+        }
+        
+        if (zeit==0){
+            anzeigetimer.setzeInhalt(zeit);
+            anzeigetimer.setzeFarbe("rot");
+        }
+        
+        {
+            for(int i=1; i<6;i++)
+            {if(ruby.beruehrt(diamanten[i])|| franklin.beruehrt(diamanten[i])){
+                    gesammeltediamanten=gesammeltediamanten+1;
+                    anzeigediamanten.setzeInhalt(gesammeltediamanten);
+                    diamanten[i].animiereTransparenz(0.5, 100);
+                    }
+            }
+        }
         //if(ruby.beruehrt(diamand[])||franklin.beruhrt(diamand[]){
         //diamand[i].animiereFarbe(0.5, "schwarz");
         //diamand[i].entfernen();
+        //}
 
         //for(int i=0;i<10;i++){if(ruby.beruehrt(gift[i])){rubyverliereLeben();};};
         //for(int i=0;i<3;i++){if(ruby.beruehrt(nilpferde[i])){rubyverliereLeben();}};
@@ -218,43 +248,7 @@ public class Level2 extends SPIEL
         }if (taste == 38){
             franklin.springe(3);
         }
-        //if(taste == 65){
-        //  ruby.bewegeNachLinksR();
-        //}else if(taste == 68){
-        //  ruby.bewegeNachRechtsR();
-        //}else if (taste == 87){
-        //  ruby.springen();
-        //}else {ruby.anhalten();}
 
-        // if(taste == 38){
-        //  pausiert = true;
-        //  anzeigeleben.setzeInhalt("Leben:"+leben+ "                                        PAUSE");            
-        // }if (taste == 40){
-        //ball.bewegen();
-        //ball.geschwindigkeit=0.2;
-        //   pausiert = false;
-        //  anzeigeleben.setzeInhalt("Leben:"+leben);
-        // }
-        //if(pausiert == false){
-        //if(taste == 37){
-        //franklin.bewegeNachLinksF();
-        //}
-        //if(taste == 39){
-        //franklin.bewegeNachRechtsF();
-        //}
-        //if (taste == 38){
-        //franklin.springe(3);
-        //}
-        //if(taste == 65){
-        //ruby.bewegeNachLinksR();
-        //}
-        //if(taste == 68){
-        //ruby.bewegeNachRechtsR();
-        //}
-        //if (taste == 87){
-        //ruby.springe(4);
-        //}
-        //{ruby.anhalten();}
     }
 
     @Override
@@ -264,11 +258,11 @@ public class Level2 extends SPIEL
         }
         if(taste == 65||taste == 68){
             ruby.deltaX = 0;
-        }        
-    }
+        }   
+    }     
 
     public void rubyverliereLeben(){
-        if(leben>0){leben=leben-1;};
+        if(leben>0){leben=leben-1;}
         if(leben==2)anzeigeleben.setzeInhalt("Leben: I I");
         if(leben==1)anzeigeleben.setzeInhalt("Leben: I");
         if (leben>0){
@@ -287,11 +281,7 @@ public class Level2 extends SPIEL
             anzeigeleben.setzeInhalt(" ");};
     }
 
-    public void diamantensammeln(){
-        for(int i=0; i<7;i++){if(ruby.beruehrt(diamanten[i])|| franklin.beruehrt(diamanten[i])){
-                gesammeltediamanten=gesammeltediamanten+1;
-                anzeigediamanten.setzeInhalt(gesammeltediamanten);}
-        }}
+    
     // public String gewinnen(){
     //if(ruby.beruehrt(autolevel1)&& franklin.beruehrt(autolevel1)){
     //return("Gewonnen!");}}

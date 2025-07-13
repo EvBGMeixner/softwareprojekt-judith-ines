@@ -6,7 +6,7 @@ public class Baumstamm extends FIGUR
     public Baumstamm( String bildName )
     {
         super( bildName);
-        machePassiv();
+        
     }
     public void umfallen(){
         drehenUm(90);
