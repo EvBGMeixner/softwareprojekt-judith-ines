@@ -25,11 +25,7 @@ public class Level2 extends SPIEL
     Gift[] gift;
     Baumstamm[] baumstamm;
     Auto autolevel1;
-    Diamand diamanten0;
-    Diamand diamanten1;
-    Diamand diamanten2;
-    Diamand diamanten3;
-    Diamand diamanten4;
+    Diamand[] diamanten;
     Liane[] lianen;
     TEXT anzeigeleben;
     TEXT anzeigeverloren;
@@ -40,6 +36,11 @@ public class Level2 extends SPIEL
     TEXT anzeigetimer;
     int zeit;
     boolean zustanddiamant;
+    boolean ende;
+    Stern stern1;
+    Stern stern2;
+    Stern stern3;
+    int punkte;
     public Level2()
     {   
         super(800,600, false);
@@ -163,19 +164,18 @@ public class Level2 extends SPIEL
         baumstamm[0].setzeMittelpunkt(8,-6);
         baumstamm[1].setzeMittelpunkt(-9,5);
 
-        
-        
-        diamanten0 = new Diamand("Diamond_s.png");
-        diamanten1 = new Diamand("Diamond_s.png");
-        diamanten2 = new Diamand("Diamond_s.png");
-        diamanten3 = new Diamand("Diamond_s.png");
-        diamanten4 = new Diamand("Diamond_s.png");
-        
-        diamanten0.setzeMittelpunkt(12,-6);
-        diamanten1.setzeMittelpunkt(11,3);
-        diamanten2.setzeMittelpunkt(-12,1);
-        diamanten3.setzeMittelpunkt(-3,-1);
-        diamanten4.setzeMittelpunkt(-12.5,5);/*
+        diamanten=new Diamand[5];
+
+        for (int i=0; i<diamanten.length; i++){
+            diamanten[i] = new Diamand("Diamond_s.png");
+        }
+
+        diamanten[0].setzeMittelpunkt(12,-6);
+        diamanten[1].setzeMittelpunkt(11,3);
+        diamanten[2].setzeMittelpunkt(-12,1);
+        diamanten[3].setzeMittelpunkt(-3,-1);
+        diamanten[4].setzeMittelpunkt(-12.5,5);/*
+
         //lianen= new Liane[6];
         //for (int i=0; i<lianen.length; i++){
         //lianen[i] = new Liane("liane.png");
@@ -188,9 +188,9 @@ public class Level2 extends SPIEL
         }*/
         anzeigeleben=new TEXT (-10,9,0.5,"Leben: I I I");
         anzeigediamanten= new TEXT(10,9,0.5,"Diamanten: 0");
+        anzeigeverloren = new TEXT(0,0,2,"  ");
         gesammeltediamanten=0;
-        //FRANKLIN.aktivMachen();
-        //RUBY.aktivMachen();
+        ende=false;
         //for(int i; i<30; i++){blöcke[i].passivMachen();};
         // Baumstamm.passivMachen();
 
@@ -204,18 +204,26 @@ public class Level2 extends SPIEL
             franklin.bewegenF();
         }
         if(istTasteGedrueckt(68)){
+            ruby.macheAktiv();
             ruby.verschiebenUm(0.1,0);}
         if(istTasteGedrueckt(65)){
+            ruby.macheAktiv();
             ruby.verschiebenUm(-0.1,0);}
         if(istTasteGedrueckt(87)){
+            ruby.macheAktiv();
             ruby.springe(1);}
+        if(istTasteGedrueckt(83)){
+            ruby.machePassiv();
+        }
+        if(ende==false){
 
-        timer++;
-        if(zeit>0){
-            if (timer>=65){
-                zeit--;
-                timer = 0;
-                anzeigetimer.setzeInhalt(zeit);
+            timer++;
+            if(zeit>0){
+                if (timer>=65){
+                    zeit--;
+                    timer = 0;
+                    anzeigetimer.setzeInhalt(zeit);
+                }
             }
         }
 
@@ -223,38 +231,58 @@ public class Level2 extends SPIEL
             anzeigetimer.setzeInhalt(zeit);
             anzeigetimer.setzeFarbe("rot");
         }
-        
-        //for(int i=0; i<5;i++){
-                //if(ruby.beruehrt(diamanten0)){
-                //gesammeltediamanten=gesammeltediamanten+1;
-                //diamanten0.setzeSichtbar(false);
 
-            //}
-            //}
-            
-            //if(ruby.beruehrt(diamand[])||franklin.beruhrt(diamand[]){
-            //diamand[i].animiereFarbe(0.5, "schwarz");
-            //diamand[i].entfernen();
-            //}
+        if(diamanten != null){
+            for(int i=0; i<diamanten.length;i++){
+                if(diamanten[i] != null && diamanten[i].istSichtbar() && ruby.beruehrt(diamanten[i])){
+                    gesammeltediamanten=gesammeltediamanten+1;
+                    anzeigediamanten.setzeInhalt("Diamanten: "+ gesammeltediamanten);
+                    diamanten[i].setzeSichtbar(false);
+                    diamanten[i].entfernen();}
+            }
+        }
 
-            //for(int i=0;i<10;i++){if(ruby.beruehrt(gift[i])){rubyverliereLeben();};};
-            //for(int i=0;i<3;i++){if(ruby.beruehrt(nilpferde[i])){rubyverliereLeben();}};
-            //for(int i=0;i<3;i++){if(franklin.beruehrt(nilpferde[i])){franklinverliereLeben();};}
-            //for(int i=0;i<3;i++){if(ruby.beruehrt(baumstamm[i])||franklin.beruehrt(baumstamm[i])){
-            //baumstamm[i].umfallen();}}
+        if(gift != null){
+            for(int i=0; i<gift.length;i++){
+                if(gift[i] != null && gift[i].istSichtbar() && ruby.beruehrt(gift[i])){
+                    rubyverliereLeben();}
+            }
+        }
 
-        
+        if(nilpferde != null){
+            for(int i=0; i<nilpferde.length;i++){
+                if(nilpferde[i] != null && nilpferde[i].istSichtbar() && ruby.beruehrt(nilpferde[i])){
+                    rubyverliereLeben();}
+            }
+        }
+        //}
+        //}
+
+        //if(ruby.beruehrt(diamand[])||franklin.beruhrt(diamand[]){
+        //diamand[i].animiereFarbe(0.5, "schwarz");
+        //diamand[i].entfernen();
+        //}
+
+        //for(int i=0;i<10;i++){if(ruby.beruehrt(gift[i])){rubyverliereLeben();};};
+        //for(int i=0;i<3;i++){if(ruby.beruehrt(nilpferde[i])){rubyverliereLeben();}};
+        //for(int i=0;i<3;i++){if(franklin.beruehrt(nilpferde[i])){franklinverliereLeben();};}
+
     }
 
     @Override
     public void tasteReagieren(int taste){
 
         if(taste == 37){
+            franklin.macheAktiv();
             franklin.bewegeNachLinksF();
         }if(taste == 39){
+            franklin.macheAktiv();
             franklin.bewegeNachRechtsF();
         }if (taste == 38){
+            franklin.macheAktiv();
             franklin.springe(3);
+        }if(taste==40){
+            franklin.machePassiv();
         }
 
     }
@@ -274,9 +302,10 @@ public class Level2 extends SPIEL
         if(leben==2)anzeigeleben.setzeInhalt("Leben: I I");
         if(leben==1)anzeigeleben.setzeInhalt("Leben: I");
         if (leben>0){
-            ruby.geheAufStart();};
+            ruby.setzeMittelpunkt( -8 , -9 );};
         if(leben==0){anzeigeverloren.setzeInhalt("verloren :(");
-            anzeigeleben.setzeInhalt(" ");};
+            anzeigeleben.setzeInhalt(" ");
+            ende = true;};
     }
 
     public void franklinverliereLeben(){
@@ -284,13 +313,29 @@ public class Level2 extends SPIEL
         if(leben==2)anzeigeleben.setzeInhalt("Leben: I I");
         if(leben==1)anzeigeleben.setzeInhalt("Leben: I");
         if (leben>0){
-            ruby.geheAufStart();};
+            franklin.setzeMittelpunkt(-9,-9);};
         if(leben==0){anzeigeverloren.setzeInhalt("verloren :(");
-            anzeigeleben.setzeInhalt(" ");};
+            anzeigeleben.setzeInhalt(" ");
+            ende= true;
+        };
     }
 
-    // public String gewinnen(){
-    //if(ruby.beruehrt(autolevel1)&& franklin.beruehrt(autolevel1)){
-    //return("Gewonnen!");}}
+    public void gewinnen(){
+        if(ruby.beruehrt(autolevel1)&& franklin.beruehrt(autolevel1)){
+            anzeigeverloren.setzeInhalt("Gewonnen!");
+            ende = true;
+            if(zeit>0 && punkte==1){
+                punkte++;
+            }
+            if(gesammeltediamanten==5){
+                punkte++;
+            }
+            if(punkte==1){
+                }
+            if(punkte==2){}
+            if(punkte==3){}
+        }
+    }
+
 }
 

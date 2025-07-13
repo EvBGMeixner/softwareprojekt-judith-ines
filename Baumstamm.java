@@ -7,6 +7,7 @@ public class Baumstamm extends FIGUR
     {
         super( bildName);
         
+        
     }
     public void umfallen(){
         drehenUm(90);
