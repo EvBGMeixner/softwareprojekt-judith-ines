@@ -6,7 +6,7 @@ public class Baumstamm extends FIGUR
     public Baumstamm( String bildName )
     {
         super( bildName);
-        
+        macheAktiv();
         
     }
     public void umfallen(){

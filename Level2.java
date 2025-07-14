@@ -40,7 +40,11 @@ public class Level2 extends SPIEL
     Stern stern1;
     Stern stern2;
     Stern stern3;
+    Stern stern4;
+    Stern stern5;
+    Stern stern6;
     int punkte;
+    Hintergrund hintergrund;
     public Level2()
     {   
         super(800,600, false);
@@ -50,6 +54,9 @@ public class Level2 extends SPIEL
         blöckereihe14= new BLOCK[14];
         int k=-13;
         zeit=120;
+        punkte=1;
+        //setzeHintergrundgrafik("Hintergrund.png");
+        
 
         for (int i=0; i<blöckereihe14.length; i++){
             blöckereihe14[i] = new BLOCK(k, -10); // Beispiel: BLOCK(int x, int y)
@@ -134,6 +141,10 @@ public class Level2 extends SPIEL
             blöckereihe2[i] = new BLOCK(u, 6); // Beispiel: BLOCK(int x, int y)
             u=u+2;
         }
+        hintergrund = new Hintergrund("Wald.png");
+        hintergrund.setzeEbene(-1);
+        hintergrund.skaliere(8);
+        hintergrund.setzeMittelpunkt(0,0);
         franklin= new FRANKLIN("Titelloses 42.png");
         franklin.setzeMittelpunkt( -9 , -9 );
         ruby= new RUBY("Ruby_s.png");
@@ -164,6 +175,26 @@ public class Level2 extends SPIEL
         baumstamm[0].setzeMittelpunkt(8,-6);
         baumstamm[1].setzeMittelpunkt(-9,5);
 
+        stern1 = new Stern("Stern.png");
+        stern2 = new Stern("Stern.png");
+        stern3 = new Stern("Stern.png");
+        stern4 = new Stern("Sterngrau.png");
+        stern5 = new Stern("Sterngrau.png");
+        stern6 = new Stern("Sterngrau.png");
+        stern1.setzeSichtbar(false);
+        stern2.setzeSichtbar(false);
+        stern3.setzeSichtbar(false);
+        stern4.setzeSichtbar(false);
+        stern5.setzeSichtbar(false);
+        stern6.setzeSichtbar(false);
+        stern1.setzeMittelpunkt(-3,-3);
+        stern2.setzeMittelpunkt(0,-3);
+        stern3.setzeMittelpunkt(3,-3);
+        stern4.setzeMittelpunkt(-3,-3);
+        stern5.setzeMittelpunkt(0,-3);
+        stern6.setzeMittelpunkt(3,-3);
+        //Sorry, dass das nicht in einem Feld ist, da kamen komische fehlermeldungen auf..
+
         diamanten=new Diamand[5];
 
         for (int i=0; i<diamanten.length; i++){
@@ -188,18 +219,16 @@ public class Level2 extends SPIEL
         }*/
         anzeigeleben=new TEXT (-10,9,0.5,"Leben: I I I");
         anzeigediamanten= new TEXT(10,9,0.5,"Diamanten: 0");
-        anzeigeverloren = new TEXT(0,0,2,"  ");
+        anzeigeverloren = new TEXT(-3.5,7,2,"  ");
         gesammeltediamanten=0;
         ende=false;
-        //for(int i; i<30; i++){blöcke[i].passivMachen();};
-        // Baumstamm.passivMachen();
 
     }
 
     @Override
     public void bildAktualisierungReagieren(double sekunden) {
 
-        if (pausiert==false){
+        if (ende==false){
             ruby.bewegenR();
             franklin.bewegenF();
         }
@@ -210,6 +239,7 @@ public class Level2 extends SPIEL
             ruby.macheAktiv();
             ruby.verschiebenUm(-0.1,0);}
         if(istTasteGedrueckt(87)){
+            
             ruby.macheAktiv();
             ruby.springe(1);}
         if(istTasteGedrueckt(83)){
@@ -255,6 +285,8 @@ public class Level2 extends SPIEL
                     rubyverliereLeben();}
             }
         }
+        gewinnen();
+
         //}
         //}
 
@@ -271,20 +303,20 @@ public class Level2 extends SPIEL
 
     @Override
     public void tasteReagieren(int taste){
-
-        if(taste == 37){
-            franklin.macheAktiv();
-            franklin.bewegeNachLinksF();
-        }if(taste == 39){
-            franklin.macheAktiv();
-            franklin.bewegeNachRechtsF();
-        }if (taste == 38){
-            franklin.macheAktiv();
-            franklin.springe(3);
-        }if(taste==40){
-            franklin.machePassiv();
+        if(ende==false){
+            if(taste == 37){
+                franklin.macheAktiv();
+                franklin.bewegeNachLinksF();
+            }if(taste == 39){
+                franklin.macheAktiv();
+                franklin.bewegeNachRechtsF();
+            }if (taste == 38){
+                franklin.macheAktiv();
+                franklin.springe(5);
+            }if(taste==40){
+                franklin.machePassiv();
+            }
         }
-
     }
 
     @Override
@@ -314,25 +346,43 @@ public class Level2 extends SPIEL
         if(leben==1)anzeigeleben.setzeInhalt("Leben: I");
         if (leben>0){
             franklin.setzeMittelpunkt(-9,-9);};
-        if(leben==0){anzeigeverloren.setzeInhalt("verloren :(");
+        if(leben==0){
+            anzeigeverloren.setzeInhalt("verloren :(");
             anzeigeleben.setzeInhalt(" ");
             ende= true;
         };
     }
 
     public void gewinnen(){
-        if(ruby.beruehrt(autolevel1)&& franklin.beruehrt(autolevel1)){
-            anzeigeverloren.setzeInhalt("Gewonnen!");
-            ende = true;
-            if(zeit>0 && punkte==1){
-                punkte++;
+        if(stern1 != null && stern2 != null && stern3 != null && stern4 != null)
+        {if(stern5 != null && stern6 != null)
+            {if(ruby.beruehrt(autolevel1)&& franklin.beruehrt(autolevel1)){
+                    if(zeit>0 && punkte==1){
+                        punkte++;
+                    }
+                    if(gesammeltediamanten==5){
+                        punkte++;
+                    }
+                    if(punkte==1){
+                        stern1.setzeSichtbar(true);
+                        stern5.setzeSichtbar(true);
+                        stern6.setzeSichtbar(true);
+                    }
+                    if(punkte==2){
+                        stern1.setzeSichtbar(true);
+                        stern2.setzeSichtbar(true);
+                        stern6.setzeSichtbar(true);
+                    }
+                    if(punkte==3){
+                        stern1.setzeSichtbar(true);
+                        stern2.setzeSichtbar(true);
+                        stern3.setzeSichtbar(true);
+                    }
+                    anzeigeverloren.setzeInhalt("Gewonnen!");
+                    anzeigeverloren.setzeSichtbar(true);
+                    ende = true;
+                }
             }
-            if(gesammeltediamanten==5){
-                punkte++;
-            }
-            if(punkte==1){}
-            if(punkte==2){}
-            if(punkte==3){}
         }
     }
 
