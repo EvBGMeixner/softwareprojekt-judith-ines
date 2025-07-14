@@ -23,7 +23,10 @@ public class Level2 extends SPIEL
     RUBY ruby;
     Nilpferd[] nilpferde;
     Gift[] gift;
-    Baumstamm[] baumstamm;
+    //Baumstamm[] baumstamm;
+    Baumstamm baumstamm1;
+    Baumstamm baumstamm2;
+    Baumstamm baumstamm3;
     Auto autolevel1;
     Diamand[] diamanten;
     Liane[] lianen;
@@ -44,19 +47,20 @@ public class Level2 extends SPIEL
     Stern stern5;
     Stern stern6;
     int punkte;
+    String franklinzustand;
     Hintergrund hintergrund;
+    boolean franklinaktiv;
     public Level2()
     {   
         super(800,600, false);
         leben=3;
-        pausiert=false;
         setzeSchwerkraft(3.5);
         blöckereihe14= new BLOCK[14];
         int k=-13;
         zeit=120;
         punkte=1;
+        franklinaktiv=true;
         //setzeHintergrundgrafik("Hintergrund.png");
-        
 
         for (int i=0; i<blöckereihe14.length; i++){
             blöckereihe14[i] = new BLOCK(k, -10); // Beispiel: BLOCK(int x, int y)
@@ -89,8 +93,7 @@ public class Level2 extends SPIEL
             blöckereihe9[i] = new BLOCK(o, -5); // Beispiel: BLOCK(int x, int y)
             o=o+2;
         }
-
-        block91=new BLOCK(-5,-5);
+        //block91=new BLOCK(-5,-5);
         block92=new BLOCK(5,-5);
 
         blöckereihe8= new BLOCK[3];
@@ -146,8 +149,21 @@ public class Level2 extends SPIEL
         hintergrund.skaliere(8);
         hintergrund.setzeMittelpunkt(0,0);
         franklin= new FRANKLIN("Titelloses 42.png");
+        franklin.fuegeZustandVonEinzelbildernHinzu
+        ("franklinstehen","Titelloses 42.png");
+        franklin.fuegeZustandVonEinzelbildernHinzu
+        ("franklinlaufen", "franklinlaufen1_small.png", "franklinlaufen2_small.png");
+        franklin.fuegeZustandVonEinzelbildernHinzu
+        ("franklinspringen", "franklinspringen_small.png");
         franklin.setzeMittelpunkt( -9 , -9 );
+
         ruby= new RUBY("Ruby_s.png");
+        ruby.fuegeZustandVonEinzelbildernHinzu
+        ("rubystehen", "Ruby_s.png");
+        ruby.fuegeZustandVonEinzelbildernHinzu
+        ("rubylaufen", "rubylaufen1_small.png", "rubylaufen2_small.png");
+        ruby.fuegeZustandVonEinzelbildernHinzu
+        ("rubyspringen", "rubyspringen_small.png");
         ruby.setzeMittelpunkt( -8 , -9 );
         anzeigetimer = new TEXT(0, 9, 1, zeit);
 
@@ -169,11 +185,18 @@ public class Level2 extends SPIEL
         gift[1].setzeMittelpunkt(-6,-6.75);
         gift[2].setzeMittelpunkt(-10,5.25);
         gift[3].setzeMittelpunkt(5,5.25);
-        baumstamm= new Baumstamm[2];
-        for (int i=0; i<baumstamm.length; i++){
-            baumstamm[i] = new Baumstamm("Baumstamm_.png");}
-        baumstamm[0].setzeMittelpunkt(8,-6);
-        baumstamm[1].setzeMittelpunkt(-9,5);
+        //baumstamm= new Baumstamm[3];
+        //for (int i=0; i<baumstamm.length; i++){
+        //baumstamm[i] = new Baumstamm("Baumstamm_.png");}
+        //baumstamm[0].setzeMittelpunkt(-8,-6);
+        //baumstamm[1].setzeMittelpunkt(-10,5);
+        //baumstamm[2].setzeMittelpunkt(-6,0);
+        baumstamm1 = new Baumstamm("Baumstamm_.png");
+        baumstamm2 = new Baumstamm("Baumstamm_.png");
+        baumstamm3 = new Baumstamm("Baumstamm_.png");
+        baumstamm1.setzeMittelpunkt(-8,-6);
+        baumstamm2.setzeMittelpunkt(-10,5);
+        baumstamm3.setzeMittelpunkt(-6,0);
 
         stern1 = new Stern("Stern.png");
         stern2 = new Stern("Stern.png");
@@ -232,21 +255,32 @@ public class Level2 extends SPIEL
             ruby.bewegenR();
             franklin.bewegenF();
         }
-        if(istTasteGedrueckt(68)){
-            ruby.macheAktiv();
-            ruby.spiegelnHorizontal(true);
-            ruby.verschiebenUm(0.1,0);}
-        if(istTasteGedrueckt(65)){
-            ruby.macheAktiv();
-            ruby.spiegelnHorizontal(false);
-            ruby.verschiebenUm(-0.1,0);}
-        if(istTasteGedrueckt(87)){
-            
-            ruby.macheAktiv();
-            ruby.springe(1);}
-        if(istTasteGedrueckt(83)){
-            ruby.machePassiv();
-        }
+        if(ende==false){
+            if(istTasteGedrueckt(68)){
+                ruby.macheAktiv();
+                //ruby.setzeZustand("rubylaufen");
+                ruby.spiegelnHorizontal(true);
+                ruby.verschiebenUm(0.1,0);}
+            if(istTasteGedrueckt(65)){
+                ruby.macheAktiv();
+                //ruby.setzeZustand("rubylaufen");
+                ruby.spiegelnHorizontal(false);
+                ruby.verschiebenUm(-0.1,0);}
+            if(istTasteGedrueckt(87)){
+                ruby.macheAktiv();
+                //ruby.setzeZustand("rubyspringen");
+                ruby.springe(1);}
+            if(istTasteGedrueckt(83)){
+                ruby.machePassiv();
+            }
+        } 
+        //die animationen von ruby wurden in tasteReagieren verlegt da
+        //BildAktualisierungReagieren zu schnell neu lädt als dass die Laufanimation
+        //beide Bilder zeigen könnte. Wenn man jetzt mit Ruby in eine Richtung läuft
+        //und die taste für die andere richtung drückt und erst dannach die erste
+        //loslässt, geht sie zwar noch in die richtige richtung allerding ohne
+        //animationen da tastelosgelassenreagieren und deswegen das stehende bild 
+        //von ruby der letzte Befehl war.
         if(ende==false){
 
             timer++;
@@ -293,6 +327,11 @@ public class Level2 extends SPIEL
             }
         }
         gewinnen();
+        if(baumstamm1 != null){
+            if(baumstamm1.nenneMittelpunktX()== -2){
+                baumstamm2.machePassiv();
+            }
+        }
 
         //}
         //}
@@ -311,20 +350,40 @@ public class Level2 extends SPIEL
     @Override
     public void tasteReagieren(int taste){
         if(ende==false){
+            if(taste == 68){
+                ruby.setzeZustand("rubylaufen");
+            }
+            if(taste == 65){
+                ruby.setzeZustand("rubylaufen");
+            }
+            if(taste == 87){
+                ruby.setzeZustand("rubyspringen");
+            }
             if(taste == 37){
                 franklin.macheAktiv();
+                franklinaktiv=true;
+                franklin.setzeZustand("franklinlaufen");
                 franklin.spiegelnHorizontal(false);
                 franklin.bewegeNachLinksF();
             }if(taste == 39){
                 franklin.macheAktiv();
+                franklinaktiv=true;
+                franklin.setzeZustand("franklinlaufen");
                 franklin.spiegelnHorizontal(true);
                 franklin.bewegeNachRechtsF();
             }if (taste == 38){
                 franklin.macheAktiv();
+                franklinaktiv=true;
+                franklin.setzeZustand("franklinspringen");
                 franklin.springe(5);
-            }if(taste==40){
-                franklin.machePassiv();
+            }if(taste==40 && franklin.steht()==true){
+                if(franklinaktiv=true){    
+                    franklin.machePassiv();
+                    franklinaktiv=false;
+                }
             }
+            //2 mal hintereinander pfeiltaste nach unten bringt das Spiel zum
+            //Abstürzen???
         }
     }
 
@@ -332,9 +391,11 @@ public class Level2 extends SPIEL
     public void tasteLosgelassenReagieren(int taste){
         if(taste == 37||taste == 39){
             franklin.deltaX = 0;
+            franklin.setzeZustand("franklinstehen");
         }
         if(taste == 65||taste == 68){
             ruby.deltaX = 0;
+            ruby.setzeZustand("rubystehen");
         }   
     }     
 
