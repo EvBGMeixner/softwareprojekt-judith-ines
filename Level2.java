@@ -234,9 +234,11 @@ public class Level2 extends SPIEL
         }
         if(istTasteGedrueckt(68)){
             ruby.macheAktiv();
+            ruby.spiegelnHorizontal(true);
             ruby.verschiebenUm(0.1,0);}
         if(istTasteGedrueckt(65)){
             ruby.macheAktiv();
+            ruby.spiegelnHorizontal(false);
             ruby.verschiebenUm(-0.1,0);}
         if(istTasteGedrueckt(87)){
             
@@ -269,12 +271,17 @@ public class Level2 extends SPIEL
                     anzeigediamanten.setzeInhalt("Diamanten: "+ gesammeltediamanten);
                     diamanten[i].setzeSichtbar(false);
                     diamanten[i].entfernen();}
+                if(diamanten[i] != null && diamanten[i].istSichtbar() && franklin.beruehrt(diamanten[i])){
+                    gesammeltediamanten=gesammeltediamanten+1;
+                    anzeigediamanten.setzeInhalt("Diamanten: "+ gesammeltediamanten);
+                    diamanten[i].setzeSichtbar(false);
+                    diamanten[i].entfernen();}
             }
         }
 
         if(gift != null){
             for(int i=0; i<gift.length;i++){
-                if(gift[i] != null && gift[i].istSichtbar() && ruby.beruehrt(gift[i])){
+                if(gift[i] != null && ruby.beruehrt(gift[i])){
                     rubyverliereLeben();}
             }
         }
@@ -306,9 +313,11 @@ public class Level2 extends SPIEL
         if(ende==false){
             if(taste == 37){
                 franklin.macheAktiv();
+                franklin.spiegelnHorizontal(false);
                 franklin.bewegeNachLinksF();
             }if(taste == 39){
                 franklin.macheAktiv();
+                franklin.spiegelnHorizontal(true);
                 franklin.bewegeNachRechtsF();
             }if (taste == 38){
                 franklin.macheAktiv();
