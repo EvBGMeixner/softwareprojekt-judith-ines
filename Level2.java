@@ -274,13 +274,7 @@ public class Level2 extends SPIEL
                 ruby.machePassiv();
             }
         } 
-        //die animationen von ruby wurden in tasteReagieren verlegt da
-        //BildAktualisierungReagieren zu schnell neu lädt als dass die Laufanimation
-        //beide Bilder zeigen könnte. Wenn man jetzt mit Ruby in eine Richtung läuft
-        //und die taste für die andere richtung drückt und erst dannach die erste
-        //loslässt, geht sie zwar noch in die richtige richtung allerding ohne
-        //animationen da tastelosgelassenreagieren und deswegen das stehende bild 
-        //von ruby der letzte Befehl war.
+        
         if(ende==false){
 
             timer++;
