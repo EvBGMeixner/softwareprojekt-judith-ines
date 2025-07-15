@@ -61,7 +61,7 @@ public class Level2 extends SPIEL
         setzeSchwerkraft(3.5);
         blöckereihe14= new BLOCK[14];
         int k=-13;
-        zeit=120;
+        zeit=180;
         punkte=1;
         franklinaktiv=true;
         start=false;
@@ -101,7 +101,7 @@ public class Level2 extends SPIEL
         //block91=new BLOCK(-5,-5);
         block92=new BLOCK(5,-5);
 
-        blöckereihe8= new BLOCK[3];
+        blöckereihe8= new BLOCK[4];
         int p=-13;
         for (int i=0; i<blöckereihe8.length; i++){
             blöckereihe8[i] = new BLOCK(p, -4); // Beispiel: BLOCK(int x, int y)
@@ -197,13 +197,18 @@ public class Level2 extends SPIEL
 
         gift= new Gift[4];
         for (int i=0; i<gift.length; i++){
-            gift[i] = new Gift("Gift_.png");
+            gift[i] = new Gift("Gift.png");
             gift[i].setzeEbene(0);
+            gift[i].skaliere(0.8);
         }
-        gift[0].setzeMittelpunkt(3,-8.75);
-        gift[1].setzeMittelpunkt(-6,-6.75);
-        gift[2].setzeMittelpunkt(5,5.25);
-        gift[3].setzeMittelpunkt(-10,5.25);
+        //gift[0].setzeMittelpunkt(3,-8.75);
+        //gift[1].setzeMittelpunkt(-6,-6.75);
+        //gift[2].setzeMittelpunkt(5,5.25);
+        //gift[3].setzeMittelpunkt(-10,5.25);
+        gift[0].setzeMittelpunkt(3,-9.5);
+        gift[1].setzeMittelpunkt(-6,-7.5);
+        gift[2].setzeMittelpunkt(5,4.5);
+        gift[3].setzeMittelpunkt(-10,4.5);
         baumstamm= new Baumstamm[3];
         for (int i=0; i<baumstamm.length; i++){
             baumstamm[i] = new Baumstamm("Baumstamm_.png");
@@ -366,15 +371,17 @@ public class Level2 extends SPIEL
                 if(gift[i] != null && ruby.beruehrt(gift[i])){
                     rubyverliereLeben();}
             }
-            if(ruby.beinhaltetPunkt(-10,5.25)){
-                rubyverliereLeben();
-            }
+            
         }
 
         if(nilpferde != null){
             for(int i=0; i<nilpferde.length;i++){
                 if(nilpferde[i] != null && nilpferde[i].istSichtbar() && ruby.beruehrt(nilpferde[i])){
                     rubyverliereLeben();}
+            }
+            for(int i=0; i<nilpferde.length;i++){
+                if(nilpferde[i] != null && nilpferde[i].istSichtbar() && franklin.beruehrt(nilpferde[i])){
+                    franklinverliereLeben();}
             }
         }
 
