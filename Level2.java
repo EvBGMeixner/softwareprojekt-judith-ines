@@ -49,7 +49,11 @@ public class Level2 extends SPIEL
     int punkte;
     String franklinzustand;
     Hintergrund hintergrund;
+    Hintergrund menu;
+    Hintergrund Tutorial1;
+    Hintergrund Tutorial2;
     boolean franklinaktiv;
+    boolean start;
     public Level2()
     {   
         super(800,600, false);
@@ -60,6 +64,7 @@ public class Level2 extends SPIEL
         zeit=120;
         punkte=1;
         franklinaktiv=true;
+        start=false;
         //setzeHintergrundgrafik("Hintergrund.png");
 
         for (int i=0; i<blöckereihe14.length; i++){
@@ -148,7 +153,18 @@ public class Level2 extends SPIEL
         hintergrund.setzeEbene(-1);
         hintergrund.skaliere(8);
         hintergrund.setzeMittelpunkt(0,0);
+        menu = new Hintergrund("menu.png");
+        menu.setzeEbene(1);
+        menu.setzeSichtbar(true);
+        Tutorial1 = new Hintergrund("Tutorial1.png");
+        Tutorial1.setzeEbene(1);
+        Tutorial1.setzeSichtbar(false);
+        Tutorial2 = new Hintergrund("Tutorial2.png");
+        Tutorial2.setzeEbene(1);
+        Tutorial2.setzeSichtbar(false);
+
         franklin= new FRANKLIN("Titelloses 42.png");
+        franklin.setzeEbene(0);
         franklin.fuegeZustandVonEinzelbildernHinzu
         ("franklinstehen","Titelloses 42.png");
         franklin.fuegeZustandVonEinzelbildernHinzu
@@ -158,6 +174,7 @@ public class Level2 extends SPIEL
         franklin.setzeMittelpunkt( -9 , -9 );
 
         ruby= new RUBY("Ruby_s.png");
+        ruby.setzeEbene(0);
         ruby.fuegeZustandVonEinzelbildernHinzu
         ("rubystehen", "Ruby_s.png");
         ruby.fuegeZustandVonEinzelbildernHinzu
@@ -165,14 +182,15 @@ public class Level2 extends SPIEL
         ruby.fuegeZustandVonEinzelbildernHinzu
         ("rubyspringen", "rubyspringen_small.png");
         ruby.setzeMittelpunkt( -8 , -9 );
-        anzeigetimer = new TEXT(0, 9, 1, zeit);
 
         autolevel1= new Auto("Car_s.png");
         autolevel1.setzeMittelpunkt(11,7 );
+        autolevel1.setzeEbene(0);
 
         nilpferde= new Nilpferd[2];
         for (int i=0; i<nilpferde.length; i++){
             nilpferde[i] = new Nilpferd("Nilpferd_.png");
+            nilpferde[i].setzeEbene(0);
         }
         nilpferde[0].setzeMittelpunkt(5,-7);
         nilpferde[1].setzeMittelpunkt(0,1);
@@ -180,6 +198,7 @@ public class Level2 extends SPIEL
         gift= new Gift[4];
         for (int i=0; i<gift.length; i++){
             gift[i] = new Gift("Gift_.png");
+            gift[i].setzeEbene(0);
         }
         gift[0].setzeMittelpunkt(3,-8.75);
         gift[1].setzeMittelpunkt(-6,-6.75);
@@ -187,7 +206,9 @@ public class Level2 extends SPIEL
         gift[3].setzeMittelpunkt(-10,5.25);
         baumstamm= new Baumstamm[3];
         for (int i=0; i<baumstamm.length; i++){
-            baumstamm[i] = new Baumstamm("Baumstamm_.png");}
+            baumstamm[i] = new Baumstamm("Baumstamm_.png");
+            baumstamm[i].setzeEbene(0);
+        }
         baumstamm[0].setzeMittelpunkt(-8,-6);
         baumstamm[1].setzeMittelpunkt(-10,5);
         baumstamm[2].setzeMittelpunkt(-6,0);
@@ -216,12 +237,11 @@ public class Level2 extends SPIEL
         stern4.setzeMittelpunkt(-3,-3);
         stern5.setzeMittelpunkt(0,-3);
         stern6.setzeMittelpunkt(3,-3);
-        
 
         diamanten=new Diamand[5];
-
         for (int i=0; i<diamanten.length; i++){
             diamanten[i] = new Diamand("Diamond_s.png");
+            diamanten[i].setzeEbene(0);
         }
 
         diamanten[0].setzeMittelpunkt(12,-6);
@@ -241,21 +261,43 @@ public class Level2 extends SPIEL
         //lianen[5].setzeMittelpunkt(-6,3);
         }*/
         anzeigeleben=new TEXT (-10,9,0.5,"Leben: I I I");
+        anzeigeleben.setzeEbenenposition(0);
         anzeigediamanten= new TEXT(10,9,0.5,"Diamanten: 0");
+        anzeigediamanten.setzeEbenenposition(0);
         anzeigeverloren = new TEXT(-3.5,7,2,"  ");
         gesammeltediamanten=0;
+        anzeigetimer = new TEXT(0, 9, 1, zeit);
+        anzeigetimer.setzeEbenenposition(0);
         ende=false;
 
     }
 
     @Override
     public void bildAktualisierungReagieren(double sekunden) {
-
-        if (ende==false){
+        if (start==false){
+            if(menu != null&&menu.istSichtbar()&&istTasteGedrueckt(49)){
+                start=true;
+                ende=false;
+                menu.setzeSichtbar(false);
+            }
+            if(menu != null&&menu.istSichtbar()&&istTasteGedrueckt(50)){
+                menu.setzeSichtbar(false);
+                Tutorial1.setzeSichtbar(true);
+            }
+            //if(Tutorial2 != null&&Tutorial2.istSichtbar()&&Tutorial1.istSichtbar()==false&&istTasteGedrueckt(32)){
+                //Tutorial2.setzeSichtbar(false);
+                //menu.setzeSichtbar(true);
+                //}
+            //if(Tutorial1 != null&&Tutorial1.istSichtbar()&&Tutorial2.istSichtbar()==false&&istTasteGedrueckt(32)){
+                //Tutorial1.setzeSichtbar(false);
+                //Tutorial2.setzeSichtbar(true);
+            //}
+        }
+        if (ende==false&&start==true){
             ruby.bewegenR();
             franklin.bewegenF();
         }
-        if(ende==false){
+        if(ende==false&&start==true){
             if(istTasteGedrueckt(68)){
                 ruby.macheAktiv();
                 //ruby.setzeZustand("rubylaufen");
@@ -266,10 +308,10 @@ public class Level2 extends SPIEL
                 //ruby.setzeZustand("rubylaufen");
                 ruby.spiegelnHorizontal(false);
                 ruby.verschiebenUm(-0.1,0);}
-            if(istTasteGedrueckt(87)){
-                ruby.macheAktiv();
-                //ruby.setzeZustand("rubyspringen");
-                ruby.springe(1);}
+            //if(istTasteGedrueckt(87)){
+            //ruby.macheAktiv();
+            //ruby.setzeZustand("rubyspringen");
+            //ruby.springe(1);}
             if(istTasteGedrueckt(83)){
                 ruby.machePassiv();
             }
@@ -279,15 +321,15 @@ public class Level2 extends SPIEL
                         if (baumstamm[i].aktiv==false){
                             baumstamm[i].macheAktiv();
                             System.out.print("aktiv");}
-                            else if(baumstamm[i].aktiv==true){ 
+                        else if(baumstamm[i].aktiv==true){ 
                             {baumstamm[i].machePassiv();
-                            System.out.print("passiv");}}
-                        }
+                                System.out.print("passiv");}}
                     }
                 }
+            }
         } 
 
-        if(ende==false){
+        if(ende==false&&start==true){
 
             timer++;
             if(zeit>0){
@@ -354,7 +396,17 @@ public class Level2 extends SPIEL
 
     @Override
     public void tasteReagieren(int taste){
-        if(ende==false){
+        if(start==false){
+            if(Tutorial2 != null&&Tutorial2.istSichtbar()&&Tutorial1.istSichtbar()==false&&taste==32){
+                Tutorial2.setzeSichtbar(false);
+                menu.setzeSichtbar(true);
+                }
+            if(Tutorial1 != null&&Tutorial1.istSichtbar()&&Tutorial2.istSichtbar()==false&&taste==32){
+                Tutorial1.setzeSichtbar(false);
+                Tutorial2.setzeSichtbar(true);
+            }
+        }
+        if(ende==false&&start==true){
             if(taste == 68){
                 ruby.setzeZustand("rubylaufen");
             }
@@ -362,7 +414,9 @@ public class Level2 extends SPIEL
                 ruby.setzeZustand("rubylaufen");
             }
             if(taste == 87){
+                ruby.macheAktiv();
                 ruby.setzeZustand("rubyspringen");
+                ruby.springe(4);
             }
             if(taste == 37){
                 franklin.macheAktiv();
@@ -380,8 +434,9 @@ public class Level2 extends SPIEL
                 franklin.macheAktiv();
                 franklinaktiv=true;
                 franklin.setzeZustand("franklinspringen");
-                franklin.springe(5);
-            }if(taste==40 && franklin.steht()==true){
+                franklin.springe(4);
+            }
+            if(taste==40 && franklin.steht()==true){
                 if(franklinaktiv=true){    
                     franklin.machePassiv();
                     franklinaktiv=false;
@@ -392,12 +447,12 @@ public class Level2 extends SPIEL
                     if(taste==88 && ruby.beruehrt(baumstamm[i])){
                         if (baumstamm[i].aktiv==false){
                             baumstamm[i].macheAktiv();}
-                            else if(baumstamm[i].aktiv==true){ 
+                        else if(baumstamm[i].aktiv==true){ 
                             {baumstamm[i].machePassiv();}}
-                        }
                     }
                 }
-            
+            }
+
             //2 mal hintereinander pfeiltaste nach unten bringt das Spiel zum
             //Abstürzen???
         }
@@ -467,6 +522,7 @@ public class Level2 extends SPIEL
                     anzeigeverloren.setzeInhalt("Gewonnen!");
                     anzeigeverloren.setzeSichtbar(true);
                     ende = true;
+                    start = false;
                 }
             }
         }
