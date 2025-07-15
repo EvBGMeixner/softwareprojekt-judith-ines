@@ -23,10 +23,10 @@ public class Level2 extends SPIEL
     RUBY ruby;
     Nilpferd[] nilpferde;
     Gift[] gift;
-    //Baumstamm[] baumstamm;
-    Baumstamm baumstamm1;
-    Baumstamm baumstamm2;
-    Baumstamm baumstamm3;
+    Baumstamm[] baumstamm;
+    //Baumstamm baumstamm1;
+    //Baumstamm baumstamm2;
+    //Baumstamm baumstamm3;
     Auto autolevel1;
     Diamand[] diamanten;
     Liane[] lianen;
@@ -183,20 +183,20 @@ public class Level2 extends SPIEL
         }
         gift[0].setzeMittelpunkt(3,-8.75);
         gift[1].setzeMittelpunkt(-6,-6.75);
-        gift[2].setzeMittelpunkt(-10,5.25);
-        gift[3].setzeMittelpunkt(5,5.25);
-        //baumstamm= new Baumstamm[3];
-        //for (int i=0; i<baumstamm.length; i++){
-        //baumstamm[i] = new Baumstamm("Baumstamm_.png");}
-        //baumstamm[0].setzeMittelpunkt(-8,-6);
-        //baumstamm[1].setzeMittelpunkt(-10,5);
-        //baumstamm[2].setzeMittelpunkt(-6,0);
-        baumstamm1 = new Baumstamm("Baumstamm_.png");
-        baumstamm2 = new Baumstamm("Baumstamm_.png");
-        baumstamm3 = new Baumstamm("Baumstamm_.png");
-        baumstamm1.setzeMittelpunkt(-8,-6);
-        baumstamm2.setzeMittelpunkt(-10,5);
-        baumstamm3.setzeMittelpunkt(-6,0);
+        gift[2].setzeMittelpunkt(5,5.25);
+        gift[3].setzeMittelpunkt(-10,5.25);
+        baumstamm= new Baumstamm[3];
+        for (int i=0; i<baumstamm.length; i++){
+            baumstamm[i] = new Baumstamm("Baumstamm_.png");}
+        baumstamm[0].setzeMittelpunkt(-8,-6);
+        baumstamm[1].setzeMittelpunkt(-10,5);
+        baumstamm[2].setzeMittelpunkt(-6,0);
+        //baumstamm1 = new Baumstamm("Baumstamm_.png");
+        //baumstamm2 = new Baumstamm("Baumstamm_.png");
+        //baumstamm3 = new Baumstamm("Baumstamm_.png");
+        //baumstamm1.setzeMittelpunkt(-8,-6);
+        //baumstamm2.setzeMittelpunkt(-10,5);
+        //baumstamm3.setzeMittelpunkt(-6,0);
 
         stern1 = new Stern("Stern.png");
         stern2 = new Stern("Stern.png");
@@ -216,7 +216,7 @@ public class Level2 extends SPIEL
         stern4.setzeMittelpunkt(-3,-3);
         stern5.setzeMittelpunkt(0,-3);
         stern6.setzeMittelpunkt(3,-3);
-        //Sorry, dass das nicht in einem Feld ist, da kamen komische fehlermeldungen auf..
+        
 
         diamanten=new Diamand[5];
 
@@ -273,8 +273,20 @@ public class Level2 extends SPIEL
             if(istTasteGedrueckt(83)){
                 ruby.machePassiv();
             }
+            if(baumstamm != null){
+                for(int i=0; i<baumstamm.length;i++){
+                    if(istTasteGedrueckt(69) && ruby.beruehrt(baumstamm[i])){
+                        if (baumstamm[i].aktiv==false){
+                            baumstamm[i].macheAktiv();
+                            System.out.print("aktiv");}
+                            else if(baumstamm[i].aktiv==true){ 
+                            {baumstamm[i].machePassiv();
+                            System.out.print("passiv");}}
+                        }
+                    }
+                }
         } 
-        
+
         if(ende==false){
 
             timer++;
@@ -308,9 +320,12 @@ public class Level2 extends SPIEL
         }
 
         if(gift != null){
-            for(int i=0; i<gift.length;i++){
+            for(int i=0; i<4;i++){
                 if(gift[i] != null && ruby.beruehrt(gift[i])){
                     rubyverliereLeben();}
+            }
+            if(ruby.beinhaltetPunkt(-10,5.25)){
+                rubyverliereLeben();
             }
         }
 
@@ -320,12 +335,8 @@ public class Level2 extends SPIEL
                     rubyverliereLeben();}
             }
         }
+
         gewinnen();
-        if(baumstamm1 != null){
-            if(baumstamm1.nenneMittelpunktX()== -2){
-                baumstamm2.machePassiv();
-            }
-        }
 
         //}
         //}
@@ -376,6 +387,17 @@ public class Level2 extends SPIEL
                     franklinaktiv=false;
                 }
             }
+            if(baumstamm != null){
+                for(int i=0; i<baumstamm.length;i++){
+                    if(taste==88 && ruby.beruehrt(baumstamm[i])){
+                        if (baumstamm[i].aktiv==false){
+                            baumstamm[i].macheAktiv();}
+                            else if(baumstamm[i].aktiv==true){ 
+                            {baumstamm[i].machePassiv();}}
+                        }
+                    }
+                }
+            
             //2 mal hintereinander pfeiltaste nach unten bringt das Spiel zum
             //Abstürzen???
         }
