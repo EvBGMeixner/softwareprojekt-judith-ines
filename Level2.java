@@ -104,7 +104,7 @@ public class Level2 extends SPIEL
         blöckereihe8= new BLOCK[4];
         int p=-13;
         for (int i=0; i<blöckereihe8.length; i++){
-            blöckereihe8[i] = new BLOCK(p, -4); // Beispiel: BLOCK(int x, int y)
+            blöckereihe8[i] = new BLOCK(p, -3.5); // Beispiel: BLOCK(int x, int y)
             p=p+2;
         }
 
@@ -119,7 +119,7 @@ public class Level2 extends SPIEL
         block62=new BLOCK(8,-2);
         block51=new BLOCK(-12,0);
         block52=new BLOCK(-6,0);
-        block53=new BLOCK(0,0);
+        block53=new BLOCK(0,1);
         block4=new BLOCK(-2,3);
 
         blöckereihe4= new BLOCK[2];
@@ -193,7 +193,7 @@ public class Level2 extends SPIEL
             nilpferde[i].setzeEbene(0);
         }
         nilpferde[0].setzeMittelpunkt(5,-7);
-        nilpferde[1].setzeMittelpunkt(0,1);
+        nilpferde[1].setzeMittelpunkt(0,2);
 
         gift= new Gift[4];
         for (int i=0; i<gift.length; i++){
@@ -205,10 +205,10 @@ public class Level2 extends SPIEL
         //gift[1].setzeMittelpunkt(-6,-6.75);
         //gift[2].setzeMittelpunkt(5,5.25);
         //gift[3].setzeMittelpunkt(-10,5.25);
-        gift[0].setzeMittelpunkt(3,-9.5);
-        gift[1].setzeMittelpunkt(-6,-7.5);
-        gift[2].setzeMittelpunkt(5,4.5);
-        gift[3].setzeMittelpunkt(-10,4.5);
+        gift[0].setzeMittelpunkt(3,-9.25);
+        gift[1].setzeMittelpunkt(-6,-7.25);
+        gift[2].setzeMittelpunkt(5,4.75);
+        gift[3].setzeMittelpunkt(-10,4.75);
         baumstamm= new Baumstamm[3];
         for (int i=0; i<baumstamm.length; i++){
             baumstamm[i] = new Baumstamm("Baumstamm_.png");

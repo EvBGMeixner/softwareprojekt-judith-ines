@@ -1,7 +1,7 @@
 
 public class BLOCK extends RECHTECK
 {
-    public BLOCK(int x, int y)
+    public BLOCK(double x, double y)
     { super(2,0.5);
       setzeMittelpunkt(x,y);
       setzeFarbe("Braun");
