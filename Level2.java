@@ -290,12 +290,12 @@ public class Level2 extends SPIEL
                 Tutorial1.setzeSichtbar(true);
             }
             //if(Tutorial2 != null&&Tutorial2.istSichtbar()&&Tutorial1.istSichtbar()==false&&istTasteGedrueckt(32)){
-                //Tutorial2.setzeSichtbar(false);
-                //menu.setzeSichtbar(true);
-                //}
+            //Tutorial2.setzeSichtbar(false);
+            //menu.setzeSichtbar(true);
+            //}
             //if(Tutorial1 != null&&Tutorial1.istSichtbar()&&Tutorial2.istSichtbar()==false&&istTasteGedrueckt(32)){
-                //Tutorial1.setzeSichtbar(false);
-                //Tutorial2.setzeSichtbar(true);
+            //Tutorial1.setzeSichtbar(false);
+            //Tutorial2.setzeSichtbar(true);
             //}
         }
         if (ende==false&&start==true){
@@ -324,11 +324,10 @@ public class Level2 extends SPIEL
                 for(int i=0; i<baumstamm.length;i++){
                     if(istTasteGedrueckt(69) && ruby.beruehrt(baumstamm[i])){
                         if (baumstamm[i].aktiv==false){
-                            baumstamm[i].macheAktiv();
-                            System.out.print("aktiv");}
+                            baumstamm[i].macheAktiv();}
                         else if(baumstamm[i].aktiv==true){ 
-                            {baumstamm[i].machePassiv();
-                                System.out.print("passiv");}}
+                            {baumstamm[i].machePassiv();}
+                        }
                     }
                 }
             }
@@ -371,7 +370,7 @@ public class Level2 extends SPIEL
                 if(gift[i] != null && ruby.beruehrt(gift[i])){
                     rubyverliereLeben();}
             }
-            
+
         }
 
         if(nilpferde != null){
@@ -407,7 +406,7 @@ public class Level2 extends SPIEL
             if(Tutorial2 != null&&Tutorial2.istSichtbar()&&Tutorial1.istSichtbar()==false&&taste==32){
                 Tutorial2.setzeSichtbar(false);
                 menu.setzeSichtbar(true);
-                }
+            }
             if(Tutorial1 != null&&Tutorial1.istSichtbar()&&Tutorial2.istSichtbar()==false&&taste==32){
                 Tutorial1.setzeSichtbar(false);
                 Tutorial2.setzeSichtbar(true);
